@@ -5,15 +5,15 @@ using UnityEngine;
 
 namespace Game.Player
 {
-    public class PlayerFrozenState : IState
+    public class PlayerFrozenState : MonoBehaviour , IState
     {
         private PlayerController _controller;
 
         private float _time;
 
-        public PlayerFrozenState(PlayerController controller)
+        void Awake()
         {
-            _controller = controller;
+            _controller = GetComponent<PlayerController>();
         }
 
         public void OnEnter()

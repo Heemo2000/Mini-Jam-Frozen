@@ -85,8 +85,12 @@ namespace Game.Player
         {
             _playerStateMachine = new StateMachine();
 
-            _defaultState = new PlayerDefaultState(this);
-            _frozenState = new PlayerFrozenState(this);
+            //_defaultState = new PlayerDefaultState(this);
+            //_frozenState = new PlayerFrozenState(this);
+
+            //Use State as a Component
+            _defaultState = GetComponent<PlayerDefaultState>();
+            _frozenState = GetComponent<PlayerFrozenState>();
 
             _playerStateMachine.AddTransition(_defaultState, _frozenState, () => IsFrozen == true);//Change State to Frozen when isFrozen is true
             _playerStateMachine.AddTransition(_frozenState, _defaultState, () => IsFrozen == false);

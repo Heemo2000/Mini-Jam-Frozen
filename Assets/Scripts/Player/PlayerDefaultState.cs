@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Player
 {
-    public class PlayerDefaultState : IState
+    public class PlayerDefaultState : MonoBehaviour , IState
     {
         private PlayerController _controller;
 
@@ -15,25 +15,25 @@ namespace Game.Player
 
         private bool _isReloading = false;
 
-        public PlayerDefaultState(PlayerController controller)
+        void Awake()
         {
-            _controller = controller;
+            _controller = GetComponent<PlayerController>();
 
-            _rb = controller.gameObject.GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody2D>();
 
             SetShooter();
         }
 
         public void OnEnter()
         {
-            _controller.StartCoroutine(DelayShoot());
+            StartCoroutine(DelayShoot());
 
             Debug.Log("Start Player Default State");
         }
 
         public void OnExit()
         {
-            _controller.StopCoroutine(DelayShoot());
+            StopCoroutine(DelayShoot());
         }
 
         public void OnUpdate()
