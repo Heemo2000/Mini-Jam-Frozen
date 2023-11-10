@@ -101,13 +101,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 20
-  _shootingDelay: 2
+  _shootingDelay: 0.5
   _shootingSnowGauge: 10
   _maxHp: 100
   _hp: 0
   _maxSnowGauge: 100
   _snowGauge: 0
   _snowGaugeDecreaseSpeed: 2
+  _freezeTime: 2
 --- !u!50 &9100815227487677166
 Rigidbody2D:
   serializedVersion: 4

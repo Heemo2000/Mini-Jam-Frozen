@@ -1,3 +1,4 @@
+using Game.StateMachineManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,19 +7,27 @@ namespace Game.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        //State Setting
+        private StateMachine _playerStateMachine;
 
-        Rigidbody2D _rb;
+        private PlayerDefaultState _defaultState;
+        private PlayerFrozenState _frozenState;
+
+        //Rigidbody2D _rb;
 
         [Header("Movement Setting")]
         [SerializeField] private float _speed = 10f;
+
+        public float FinalSpeed { get => _speed; }
 
         [Header("Shooting Setting")]
         [SerializeField] private float _shootingDelay = 2f;
         [SerializeField] private float _shootingSnowGauge = 10f;
 
-        private PlayerShooter _shooter;//Shoot a snowball with this class
+        public float ShootingDelay { get => _shootingDelay; }
+        public float ShootingSnowGauge { get => _shootingSnowGauge; }
 
-        private bool _isReloading = false;
+        
 
         [Header("Hp Setting")]//Hp Settings
         [SerializeField] private float _maxHp = 100f;
@@ -33,6 +42,16 @@ namespace Game.Player
 
         [SerializeField, Space(5f)] private float _snowGaugeDecreaseSpeed = 2f;
 
+
+        [Header("Froze Setting")]
+        [SerializeField] private float _freezeTime = 2f;
+
+        public float FreezeTime { get => _freezeTime; }
+        public bool IsFrozen { get; set; } = false;
+        
+
+        public float SnowGaugeDecreaseSpeed { get => _snowGaugeDecreaseSpeed; }
+
         public float MaxSnowGauge {  get => _maxSnowGauge; }
         public float SnowGauge { get => _snowGauge; }
 
@@ -43,9 +62,10 @@ namespace Game.Player
 
             _snowGauge = 0f;
 
-            _rb = GetComponent<Rigidbody2D>();
+            //_rb = GetComponent<Rigidbody2D>();
 
-            SetShooter();
+            SetStateMachine();
+
         }
 
         // Start is called before the first frame update
@@ -57,47 +77,22 @@ namespace Game.Player
         // Update is called once per frame
         void Update()
         {
-            SnowGaugeUpdate();
 
-            Move();
-
-            ShootSnowBall();
+            _playerStateMachine.OnUpdate();
         }
 
-        #region Movement
-
-        Vector2 dir = new Vector3();
-        private void Move()// Moveing functions
+        private void SetStateMachine()//Set the player State and State Machine
         {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
+            _playerStateMachine = new StateMachine();
 
-            dir.Set(h, v);
-            dir.Normalize();
+            _defaultState = new PlayerDefaultState(this);
+            _frozenState = new PlayerFrozenState(this);
 
-            _rb.MovePosition(_rb.position + dir * _speed * Time.deltaTime);
+            _playerStateMachine.AddTransition(_defaultState, _frozenState, () => IsFrozen == true);//Change State to Frozen when isFrozen is true
+            _playerStateMachine.AddTransition(_frozenState, _defaultState, () => IsFrozen == false);
+
+            _playerStateMachine?.SetState(_defaultState);
         }
-
-        #endregion Movement
-
-        #region Shooting
-
-        private void ShootSnowBall()
-        {
-            if(_isReloading) return;
-            if (!Input.GetMouseButtonDown(0)) return;//Shoot only when click the mouse left button
-
-            _shooter.Attack();//Well It's actually Shoot() but... lol
-
-            ChangSnowGauge(_shootingSnowGauge);
-        }
-
-        private void SetShooter()//Find Shooter at first Time
-        {
-            _shooter = GetComponentInChildren<PlayerShooter>();
-        }
-
-        #endregion Shooting
 
         #region Hp Change Setting
 
@@ -123,26 +118,24 @@ namespace Game.Player
 
         #region Snow Gauge Setting
 
-        private void ChangSnowGauge(float amount)
+        public void ChangeSnowGauge(float amount)
         {
             if(_snowGauge + amount <= 0)
             {
                 _snowGauge = 0f;
             }
-
-            if(_snowGauge + amount >= _maxSnowGauge)
+            else if(_snowGauge + amount >= _maxSnowGauge)
             {
                 _snowGauge = _maxSnowGauge;
+                IsFrozen = true;//Change to frozen State
             }
-
-            _snowGauge += amount;
+            else
+                _snowGauge += amount;
         }
 
-
-        private void SnowGaugeUpdate()//Fuction that will run inside of Update
+        public void SetSnowGauge(float snowGauge)
         {
-            ChangSnowGauge(- _snowGaugeDecreaseSpeed * Time.deltaTime);//Decreasing Snow Gauge
-
+            _snowGauge = snowGauge;
         }
 
         #endregion Snow Gauge Setting
