@@ -9,22 +9,27 @@ namespace Game.Enemy
     [RequireComponent(typeof(CircleCollider2D))]
     public class BaseEnemy : MonoBehaviour
     {
+        [Min(0f)]
         [SerializeField]private float moveSpeed = 10f;
-        
+        [Min(0f)]
+        [SerializeField]private float rotateSpeed = 10f;
         [SerializeField]private Transform target;
         [Min(0f)]
         [SerializeField]private float updateInterval = 1.0f;
         [Min(0f)]
         [SerializeField]private float wayPointCheckDistance = 0.5f;
-
-
         [Min(0f)]
         [SerializeField]private float minDistanceToTarget = 5f;
         private Seeker _seeker = null;
         private Path _path = null;
         private int _currentIndex = 0;
+
+        private float _currentAngle = 0.0f;
         private Rigidbody2D _enemyRB;
-        
+
+        public Transform Target { get => target; set => target = value; }
+        public float MinDistanceToTarget { get => minDistanceToTarget; }
+
         private IEnumerator FindPath()
         {
             while(this.enabled)
@@ -57,7 +62,7 @@ namespace Game.Enemy
             }
         }
 
-        private void Awake() 
+        protected virtual void Awake() 
         {
             _seeker = GetComponent<Seeker>();
             _enemyRB = GetComponent<Rigidbody2D>();
@@ -65,7 +70,7 @@ namespace Game.Enemy
         
         
         // Start is called before the first frame update
-        void Start()
+        protected virtual void Start()
         {
             _enemyRB.isKinematic = true;
             _currentIndex = 0;
@@ -73,8 +78,14 @@ namespace Game.Enemy
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
+            Vector2 targetDirection = (target.position - transform.position).normalized;
+
+            float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+            _currentAngle = Mathf.Lerp(_currentAngle, targetAngle, rotateSpeed * Time.fixedDeltaTime);
+            _enemyRB.MoveRotation(_currentAngle);
+
             float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
             if(_path == null || _currentIndex >= _path.vectorPath.Count || squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)
             {
@@ -86,6 +97,8 @@ namespace Game.Enemy
             Vector2 moveDirection = (wayPoint - transform.position).normalized;
             _enemyRB.MovePosition(_enemyRB.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
             
+            
+
             if(Vector2.SqrMagnitude(wayPoint - transform.position) <= wayPointCheckDistance * wayPointCheckDistance)
             {
                 _currentIndex++;

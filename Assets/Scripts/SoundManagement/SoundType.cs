@@ -8,11 +8,8 @@ namespace Game.SoundManagement
     {
         None,
         MainMenuTheme,
-        GridClick1,
-        GridClick2,
-        EasyLevelMusic,
-        MediumLevelMusic,
-        HardLevelMusic,
+        LevelTheme,
+        BulletShoot,
         ButtonClick
     }
 
