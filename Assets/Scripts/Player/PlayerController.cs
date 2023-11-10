@@ -12,6 +12,14 @@ namespace Game.Player
         [Header("Movement Setting")]
         [SerializeField] private float _speed = 10f;
 
+        [Header("Shooting Setting")]
+        [SerializeField] private float _shootingDelay = 2f;
+        [SerializeField] private float _shootingSnowGauge = 10f;
+
+        private PlayerShooter _shooter;//Shoot a snowball with this class
+
+        private bool _isReloading = false;
+
         [Header("Hp Setting")]//Hp Settings
         [SerializeField] private float _maxHp = 100f;
         [SerializeField] private float _hp;
@@ -37,6 +45,7 @@ namespace Game.Player
 
             _rb = GetComponent<Rigidbody2D>();
 
+            SetShooter();
         }
 
         // Start is called before the first frame update
@@ -51,6 +60,8 @@ namespace Game.Player
             SnowGaugeUpdate();
 
             Move();
+
+            ShootSnowBall();
         }
 
         #region Movement
@@ -68,6 +79,25 @@ namespace Game.Player
         }
 
         #endregion Movement
+
+        #region Shooting
+
+        private void ShootSnowBall()
+        {
+            if(_isReloading) return;
+            if (!Input.GetMouseButtonDown(0)) return;//Shoot only when click the mouse left button
+
+            _shooter.Attack();//Well It's actually Shoot() but... lol
+
+            ChangSnowGauge(_shootingSnowGauge);
+        }
+
+        private void SetShooter()//Find Shooter at first Time
+        {
+            _shooter = GetComponentInChildren<PlayerShooter>();
+        }
+
+        #endregion Shooting
 
         #region Hp Change Setting
 
