@@ -68,6 +68,25 @@ namespace Game.Core
             OnGameplayStart.AddListener(StartGame);
             OnGameEnd.AddListener(EndGame);
             OnBackToMain.AddListener(ExitGameplay);
+
+            //Just for testing purposes.
+            OnGameplayStart.AddListener(()=> ScoreManager.Instance.OnScoreSet?.Invoke(0));
+        }
+
+        private void Update() {
+            //Just for testing purposes.
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                OnGameplayStart?.Invoke();
+            }
+        }
+
+        private void OnDestroy() {
+            OnGamePaused.RemoveAllListeners();
+            OnGameResumed.RemoveAllListeners();
+            OnGameplayStart.RemoveAllListeners();
+            OnGameEnd.RemoveAllListeners();
+            OnBackToMain.RemoveAllListeners();
         }
         
     }
