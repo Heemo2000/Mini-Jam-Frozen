@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 9100815227487677163}
   - component: {fileID: 9100815227487677160}
   - component: {fileID: 9100815227487677161}
+  - component: {fileID: 5855346482004449996}
+  - component: {fileID: 4717167305069547147}
   - component: {fileID: 9100815227487677166}
   - component: {fileID: 9100815227487677167}
   m_Layer: 0
@@ -101,13 +103,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 20
-  _shootingDelay: 2
+  _shootingDelay: 0.5
   _shootingSnowGauge: 10
   _maxHp: 100
   _hp: 0
   _maxSnowGauge: 100
   _snowGauge: 0
   _snowGaugeDecreaseSpeed: 2
+  _freezeTime: 2
+--- !u!114 &5855346482004449996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9100815227487677164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a27b4fef2158f2d49af727b552799d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4717167305069547147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9100815227487677164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f55eaf06bd247544b6c30a633bb654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &9100815227487677166
 Rigidbody2D:
   serializedVersion: 4
