@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
+using Game.PowerupStuff;
 
 
 namespace Game.Player
 {
+
     public class PlayerController : MonoBehaviour
     {
         //State Setting
@@ -204,30 +206,17 @@ namespace Game.Player
             _defaultState.UpgradeShooter();
         }
 
-        public class PowerUpData//Use this class for powerups
+        public void PowerUp(PowerUpInfo info)
         {
-            public bool UpgradeShooter = false;
+            if (info.UpgradeShooter) UpgradeShooter();
 
-            public float SnowBallAttackAmount = 0f;
-            public float SnowBallSizeAmount = 0f;
-            public float PlayerSpeedAmount = 0f;
+            _snowBallAttackAmount += info.SnowBallAttackAmount;
+            _snowBallSizeAmount += info.SnowBallSizeAmount;
+            _playerSpeedAmount += info.PlayerSpeedAmount;
 
-            public float SnowGaugeIncreaseAmount = 0f;
-            public float SnowGaugeDecreaseAmount = 0f;
-            public float SnowGaugeSpeedDecreaseAmount = 0f;
-        }
-
-        public void PowerUp(PowerUpData data)
-        {
-            if (data.UpgradeShooter) UpgradeShooter();
-
-            _snowBallAttackAmount += data.SnowBallAttackAmount;
-            _snowBallSizeAmount += data.SnowBallSizeAmount;
-            _playerSpeedAmount += data.PlayerSpeedAmount;
-
-            _snowGaugeIncreaseAmount += data.SnowGaugeIncreaseAmount;
-            _snowGaugeDecreaseAmount += data.SnowGaugeDecreaseAmount;
-            _snowGaugeSpeedDecreaseAmount += data.SnowGaugeSpeedDecreaseAmount;
+            _snowGaugeIncreaseAmount += info.SnowGaugeIncreaseAmount;
+            _snowGaugeDecreaseAmount += info.SnowGaugeDecreaseAmount;
+            _snowGaugeSpeedDecreaseAmount += info.SnowGaugeSpeedDecreaseAmount;
         }
 
 
