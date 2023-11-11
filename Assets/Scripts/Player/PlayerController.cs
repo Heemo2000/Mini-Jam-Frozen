@@ -2,7 +2,7 @@ using Game.StateMachineManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Game.Core;
 
 
 namespace Game.Player
@@ -95,6 +95,13 @@ namespace Game.Player
         // Update is called once per frame
         void Update()
         {
+            if(!(GameManager.Instance != null && 
+                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing && 
+                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
+            {
+                return;
+            }
+
             _playerStateMachine.OnUpdate();
 
 #if UNITY_EDITOR
@@ -104,6 +111,12 @@ namespace Game.Player
 
         private void FixedUpdate()
         {
+            if(!(GameManager.Instance != null && 
+                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing && 
+                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
+            {
+                return;
+            }
             _playerStateMachine.OnFixedUpdate();//Run Update in Fixed Update for RigidBody
         }
 
