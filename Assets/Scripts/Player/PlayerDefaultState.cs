@@ -73,7 +73,7 @@ namespace Game.Player
             _shooter.Attack();//Well It's actually Shoot() but... lol
             _controller.StartCoroutine(DelayShoot());
 
-            _controller.ChangeSnowGauge(_controller.ShootingSnowGauge);
+            _controller.IncreaseSnowGauge(_controller.ShootingSnowGauge);
         }
 
         public void UpgradeShooter()
@@ -107,7 +107,7 @@ namespace Game.Player
 
         private void SnowGaugeUpdate()//Fuction that will run inside of Update
         {
-            _controller.ChangeSnowGauge(-_controller.SnowGaugeDecreaseSpeed * Time.deltaTime);//Decreasing Snow Gauge
+            _controller.DecreaseSnowGauge(_controller.SnowGaugeDecreaseSpeed * Time.deltaTime);//Decreasing Snow Gauge
 
         }
     }

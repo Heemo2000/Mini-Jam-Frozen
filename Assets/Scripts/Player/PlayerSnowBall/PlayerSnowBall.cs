@@ -10,15 +10,22 @@ namespace Game.Player
 
         [SerializeField] float _moveSpeed = 10f;
 
-        [SerializeField, Space(5f)] float _destroyTime = 3f;
+        [SerializeField, Space(10f)] float _damage = 5f;
+
+        [SerializeField, Space(10f)] float _destroyTime = 3f;
 
         private Vector2 _moveDir;
 
-        public void Init(Vector2 moveDir)
+        public void Init(Vector2 moveDir, float attackAmout, float sizeAmout)
         {
             _moveDir = moveDir.normalized;
 
+            //Debug.Log(_moveDir + "Snow ball start Moveing ");
+
             rb = GetComponent<Rigidbody2D>();
+
+            _damage *= attackAmout;
+            transform.localScale = transform.localScale * sizeAmout;
 
             StartCoroutine("DestroySnowBall");
         }
