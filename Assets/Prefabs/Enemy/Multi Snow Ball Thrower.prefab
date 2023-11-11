@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7514217665351589449}
   - component: {fileID: 7514217665351589430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7514217666616404974}
   - component: {fileID: 7514217666616404975}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7514217666951255005}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 7514217667102924923}
   - component: {fileID: 7514217667102924920}
   - component: {fileID: 2887831783985913720}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Multi Snow Ball Thrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}

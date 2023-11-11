@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4222888590472422848}
   - component: {fileID: 4222888590472422849}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4222888590940708339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 4222888591026056789}
   - component: {fileID: 4222888591026056790}
   - component: {fileID: -4136906091636701285}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Big Snow Ball Thrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4222888591437926503}
   - component: {fileID: 4222888591437926424}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
