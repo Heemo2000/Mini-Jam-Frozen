@@ -8,7 +8,6 @@ namespace Game.Core
     {
         [SerializeField]private Transform followTransform;
         [SerializeField]private SpriteRenderer graphic;
-        [SerializeField]private Vector2 tileMultiplier;
 
         [SerializeField]private Vector3 offset;
         private float _originalWidth = 0.0f;
