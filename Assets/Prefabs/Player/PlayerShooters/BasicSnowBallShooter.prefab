@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76092d8fcfae5d4c90f8744fe48c611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nextLevelShooter: {fileID: 288434451071315592, guid: dcd547f5c2233de40ac983b9ef0662b4, type: 3}
   snowBall: {fileID: 4343002766598407322, guid: b58daa6e6dcdcd642aaaec707a62d686, type: 3}
   _shootPosTransform: {fileID: 8589472446992052437}
 --- !u!1 &7182247165893007686
