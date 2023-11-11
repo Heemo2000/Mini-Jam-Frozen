@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0c40a3f82cd8a584da723cfc902fdbb1
+guid: 976754d574ba1a849925f9c1d4b8405b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Test Image_0
+      name: player_character_walk_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 400
-        height: 600
+        width: 200
+        height: 280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47c57419b3e3d96499f35504d2f9ee59
-      internalID: -693958417
+      spriteID: ad7bed0133d474e41b54ced9713939de
+      internalID: 1409658107
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test Image_1
+      name: player_character_walk_1
       rect:
         serializedVersion: 2
-        x: 400
+        x: 200
         y: 0
-        width: 400
-        height: 600
+        width: 200
+        height: 280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,29 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4304a72ebc246094fac47799812bf7d1
-      internalID: 26515716
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Test Image_2
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 0
-        width: 400
-        height: 600
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef855a2d562bdd24d977882a1d0e6d86
-      internalID: 1251692963
+      spriteID: 898b00edd973b8d439d98fe33fcb87b5
+      internalID: 286804921
       vertices: []
       indices: 
       edges: []
@@ -189,9 +168,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Test Image_1: 26515716
-      Test Image_2: 1251692963
-      Test Image_0: -693958417
+      player_character_walk_0: 1409658107
+      player_character_walk_1: 286804921
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
