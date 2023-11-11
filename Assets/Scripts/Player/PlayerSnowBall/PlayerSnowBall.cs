@@ -30,7 +30,7 @@ namespace Game.Player
             StartCoroutine("DestroySnowBall");
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             Move();
         }

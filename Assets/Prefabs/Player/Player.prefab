@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3347fc765313804e86296696a7732bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 30
+  _speed: 5
   _shootingDelay: 0.5
   _shootingSnowGauge: 10
   _maxHp: 100
@@ -143,6 +143,12 @@ MonoBehaviour:
   _snowGauge: 0
   _snowGaugeDecreaseSpeed: 2
   _freezeTime: 2
+  _snowBallAttackAmount: 0
+  _snowBallSizeAmount: 0
+  _playerSpeedAmount: 0
+  _snowGaugeIncreaseAmount: 0
+  _snowGaugeDecreaseAmount: 0
+  _snowGaugeSpeedDecreaseAmount: 0
 --- !u!114 &5855346482004449996
 MonoBehaviour:
   m_ObjectHideFlags: 0

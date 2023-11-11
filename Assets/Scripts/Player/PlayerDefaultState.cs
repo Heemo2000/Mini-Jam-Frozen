@@ -28,23 +28,26 @@ namespace Game.Player
 
         public void OnEnter()
         {
-            StartCoroutine(DelayShoot());
+            StartCoroutine("DelayShoot");
 
             Debug.Log("Start Player Default State");
         }
 
         public void OnExit()
         {
-            StopCoroutine(DelayShoot());
+            StopCoroutine("DelayShoot");
         }
 
         public void OnUpdate()
         {
             SnowGaugeUpdate();
 
-            Move();
-
             ShootSnowBall();
+        }
+
+        public void OnFixedUpdate()
+        {
+            Move();
         }
 
         #region Movement
@@ -71,7 +74,11 @@ namespace Game.Player
             if (!Input.GetMouseButtonDown(0)) return;//Shoot only when click the mouse left button
 
             _shooter.Attack();//Well It's actually Shoot() but... lol
-            _controller.StartCoroutine(DelayShoot());
+
+            _isReloading = true;
+            StartCoroutine("DelayShoot");
+
+            Debug.Log("Real Shoot");
 
             _controller.IncreaseSnowGauge(_controller.ShootingSnowGauge);
         }
@@ -97,10 +104,12 @@ namespace Game.Player
         IEnumerator DelayShoot()
         {
             _isReloading = true;
+            Debug.Log("Start Delay");
 
             yield return new WaitForSeconds(_controller.ShootingDelay);
 
             _isReloading = false;
+            Debug.Log("Stop Delay");
         }
 
         #endregion Shooting
