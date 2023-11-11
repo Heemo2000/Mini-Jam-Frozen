@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7061710201230357261}
   - component: {fileID: 4918735052114715197}
   - component: {fileID: 5083616934830944108}
+  - component: {fileID: -8246072850043863270}
   - component: {fileID: 6055562313086907361}
   m_Layer: 0
   m_Name: PlayerSnowBall
@@ -27,8 +28,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4343002766598407322}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.804481, w: 0.59397835}
+  m_LocalPosition: {x: 0.6563889, y: -5.0409474, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 10
   _damage: 5
-  _destroyTime: 3
+  _destroyTime: 2
 --- !u!50 &5083616934830944108
 Rigidbody2D:
   serializedVersion: 4
@@ -123,6 +124,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-8246072850043863270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4343002766598407322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628c141ae94236b469b394f16078c81c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &6055562313086907361
 CircleCollider2D:
   m_ObjectHideFlags: 0

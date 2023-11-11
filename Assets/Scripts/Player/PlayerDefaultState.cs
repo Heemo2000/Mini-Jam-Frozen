@@ -78,7 +78,7 @@ namespace Game.Player
             _isReloading = true;
             StartCoroutine("DelayShoot");
 
-            Debug.Log("Real Shoot");
+            //Debug.Log("Real Shoot");
 
             _controller.IncreaseSnowGauge(_controller.ShootingSnowGauge);
         }
@@ -104,12 +104,12 @@ namespace Game.Player
         IEnumerator DelayShoot()
         {
             _isReloading = true;
-            Debug.Log("Start Delay");
+            //Debug.Log("Start Delay");
 
             yield return new WaitForSeconds(_controller.ShootingDelay);
 
             _isReloading = false;
-            Debug.Log("Stop Delay");
+            //Debug.Log("Stop Delay");
         }
 
         #endregion Shooting
