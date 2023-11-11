@@ -2,7 +2,6 @@ using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Core;
 namespace Game.Player
 {
     public class PlayerSnowBall : MonoBehaviour//Snow ball class for Player
@@ -35,6 +34,8 @@ namespace Game.Player
 
         private void FixedUpdate()
         {
+            if (GameMangerObserver.CheckGameMangerStatus()) return;
+
             Move();
         }
 

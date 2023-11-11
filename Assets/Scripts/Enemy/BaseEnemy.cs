@@ -90,12 +90,8 @@ namespace Game.Enemy
         // Update is called once per frame
         protected virtual void FixedUpdate()
         {
-            if(!(GameManager.Instance != null && 
-                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing && 
-                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
-            {
-                return;
-            }
+            if (GameMangerObserver.CheckGameMangerStatus()) return;//Change with static checker
+
             float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
             if(_path == null || _currentIndex >= _path.vectorPath.Count || squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)
             {

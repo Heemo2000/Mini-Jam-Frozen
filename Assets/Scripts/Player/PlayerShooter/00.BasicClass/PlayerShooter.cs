@@ -2,7 +2,7 @@ using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Core;
+
 namespace Game.Player
 {
     public class PlayerShooter : MonoBehaviour
@@ -21,12 +21,8 @@ namespace Game.Player
         // Update is called once per frame
         protected virtual void Update()
         {
-            if(!(GameManager.Instance != null && 
-                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing && 
-                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
-            {
-                return;
-            }
+            if (GameMangerObserver.CheckGameMangerStatus()) return;
+
             RotateShooter();
         }
 
@@ -72,5 +68,7 @@ namespace Game.Player
 
             return shooter.GetComponent<PlayerShooter>();
         }
+
+        
     }
 }

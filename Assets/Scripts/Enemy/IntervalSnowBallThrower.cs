@@ -16,12 +16,8 @@ namespace Game.Enemy
 
         protected override void Update()
         {
-            if(!(GameManager.Instance != null && 
-                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing && 
-                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
-            {
-                return;
-            }
+            if (GameMangerObserver.CheckGameMangerStatus()) return;//Change with static checker
+
             float squareDistanceToTarget = Vector2.SqrMagnitude(base.Target.position - transform.position);
             if(squareDistanceToTarget <= base.MinShootDistance * base.MinShootDistance)
             {

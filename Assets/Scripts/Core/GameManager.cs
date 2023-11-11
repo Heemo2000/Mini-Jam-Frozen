@@ -5,6 +5,23 @@ using UnityEngine.Events;
 
 namespace Game.Core
 {
+    public static class GameMangerObserver//It's not observer pattern but..lol
+    {
+        public static bool CheckGameMangerStatus()
+        {
+            if (!GameManager.Instance) return false;
+
+            if (!(GameManager.Instance != null &&
+                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing &&
+                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
+
     public enum GamePauseStatus
     {
         Paused,

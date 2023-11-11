@@ -95,13 +95,9 @@ namespace Game.Player
         // Update is called once per frame
         void Update()
         {
-            if(!(GameManager.Instance != null && 
-                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing && 
-                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
-            {
-                return;
-            }
+            if (GameMangerObserver.CheckGameMangerStatus()) return;
 
+            //Debug.Log("Update");
             _playerStateMachine.OnUpdate();
 
 #if UNITY_EDITOR
@@ -111,12 +107,8 @@ namespace Game.Player
 
         private void FixedUpdate()
         {
-            if(!(GameManager.Instance != null && 
-                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing && 
-                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
-            {
-                return;
-            }
+            if (GameMangerObserver.CheckGameMangerStatus()) return;
+
             _playerStateMachine.OnFixedUpdate();//Run Update in Fixed Update for RigidBody
         }
 
@@ -232,5 +224,6 @@ namespace Game.Player
 
 
         #endregion Power Up Setting
+
     }
 }
