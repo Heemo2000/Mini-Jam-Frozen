@@ -6,10 +6,9 @@ namespace Game.Player
 {
     public class PlayerShooter : MonoBehaviour
     {
-        [SerializeField] protected GameObject snowBall;
+        [SerializeField] GameObject _nextLevelShooter;
 
-
-        
+        [SerializeField,Space(10f)] protected GameObject snowBall;
 
         // Update is called once per frame
         protected virtual void Update()
@@ -32,9 +31,17 @@ namespace Game.Player
 
         }
 
-        public void UpgradeShooter()
+        public PlayerShooter UpgradeShooter()
         {
+            if (_nextLevelShooter == null) return null;
 
+            Destroy(this.gameObject);
+
+            GameObject shooter = Instantiate(_nextLevelShooter);
+
+            shooter.transform.parent = this.transform.parent;
+
+            return shooter.GetComponent<PlayerShooter>();
         }
     }
 }
