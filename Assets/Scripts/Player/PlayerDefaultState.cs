@@ -13,15 +13,21 @@ namespace Game.Player
 
         private Rigidbody2D _rb;
 
+        private Animator _animator;
+
         private PlayerShooter _shooter;//Shoot a snowball with this class
 
         private bool _isReloading = false;
+
+        
 
         void Awake()
         {
             _controller = GetComponent<PlayerController>();
 
             _rb = GetComponent<Rigidbody2D>();
+
+            _animator = GetComponent<Animator>();
 
             SetShooter();
         }
@@ -48,6 +54,8 @@ namespace Game.Player
         public void OnFixedUpdate()
         {
             Move();
+
+            UpdateAnimator();
         }
 
         #region Movement
@@ -113,6 +121,18 @@ namespace Game.Player
         }
 
         #endregion Shooting
+
+        #region Animator Update
+
+        private void UpdateAnimator()
+        {
+            Vector2 mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+            _animator.SetFloat("DirX", mouseDir.normalized.x);
+            _animator.SetFloat("Speed", dir.SqrMagnitude());
+        }
+
+        #endregion Animator Update
 
         private void SnowGaugeUpdate()//Fuction that will run inside of Update
         {

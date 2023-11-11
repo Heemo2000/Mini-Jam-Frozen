@@ -9,22 +9,33 @@ namespace Game.Player
     {
         private PlayerController _controller;
 
+        private Animator _animator;
+
+        private float _firstAnimatorSpeed;
+
         private float _time;
 
         void Awake()
         {
             _controller = GetComponent<PlayerController>();
+
+            _animator = GetComponent<Animator>();
         }
 
         public void OnEnter()
         {
             _time = 0;
 
+            _firstAnimatorSpeed = _animator.speed;
+            _animator.speed = 0.0f;
+
             Debug.Log("Start Player Frozen State");
         }
 
         public void OnExit()
         {
+            _animator.speed = _firstAnimatorSpeed;
+
             _controller.SetSnowGauge(0);// Set Snow Gauge to 0 when end to froze
         }
 
