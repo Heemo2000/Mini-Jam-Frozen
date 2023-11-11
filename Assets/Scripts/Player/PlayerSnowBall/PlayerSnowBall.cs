@@ -57,6 +57,7 @@ namespace Game.Player
             {
                 Health health = other.transform.GetComponent<Health>();
                 health?.OnHealthDamaged?.Invoke(_damage);
+                ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
                 Destroy(gameObject);
             }            
             else
