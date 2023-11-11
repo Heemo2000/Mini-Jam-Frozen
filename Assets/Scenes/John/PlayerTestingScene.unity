@@ -349,6 +349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1603793671}
+  - component: {fileID: 1603793673}
   - component: {fileID: 1603793670}
   - component: {fileID: 1603793669}
   - component: {fileID: 1603793672}
@@ -458,6 +459,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1603793673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603793668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03dc40454def72e4f938fcf27e1e86f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  targetFollowSpeed: 10
 --- !u!4 &2087760956 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9100815227487677163, guid: 7007a8ee8b7707344b146d7d164856df, type: 3}
@@ -470,10 +485,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 9100815227487677161, guid: 7007a8ee8b7707344b146d7d164856df, type: 3}
-      propertyPath: _speed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 9100815227487677163, guid: 7007a8ee8b7707344b146d7d164856df, type: 3}
       propertyPath: m_RootOrder
       value: 3

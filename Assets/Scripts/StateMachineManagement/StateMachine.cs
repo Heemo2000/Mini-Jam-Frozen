@@ -52,6 +52,12 @@ namespace Game.StateMachineManagement
          }
          _currentState?.OnUpdate();
      }
+
+     public void OnFixedUpdate()//Add Fixed Update method
+     {
+        _currentState?.OnFixedUpdate();
+     }
+   
    
       public string GetCurrentStateName()
       {

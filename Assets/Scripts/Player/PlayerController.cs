@@ -95,7 +95,7 @@ namespace Game.Player
         // Update is called once per frame
         void Update()
         {
-            
+            _playerStateMachine.OnUpdate();
 
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.E)) UpgradeShooter();//Testing Upgrade System
@@ -104,7 +104,7 @@ namespace Game.Player
 
         private void FixedUpdate()
         {
-            _playerStateMachine.OnUpdate();//Run Update in Fixed Update for RigidBody
+            _playerStateMachine.OnFixedUpdate();//Run Update in Fixed Update for RigidBody
         }
 
         private void SetStateMachine()//Set the player State and State Machine

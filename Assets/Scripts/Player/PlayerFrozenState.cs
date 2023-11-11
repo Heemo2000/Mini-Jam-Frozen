@@ -39,6 +39,11 @@ namespace Game.Player
                 _controller.IsFrozen = false;//Make isFrosen to false then transition will activate
             }
         }
+
+        public void OnFixedUpdate()
+        {
+
+        }
     }
 
 }
