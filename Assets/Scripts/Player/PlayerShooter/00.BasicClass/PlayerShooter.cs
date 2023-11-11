@@ -1,3 +1,4 @@
+using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,7 +49,9 @@ namespace Game.Player
         {
             //Debug.Log("Create Snow Ball");
 
-            PlayerSnowBall snowBallClass = Instantiate(snowBall, pos, Quaternion.identity).GetComponent<PlayerSnowBall>();
+            PlayerSnowBall snowBallClass;
+            if(ObjectPoolManager.Instance) snowBallClass = ObjectPoolManager.Instance.Get(snowBall,pos, rot).GetComponent<PlayerSnowBall>();
+            else snowBallClass = Instantiate(snowBall, pos, Quaternion.identity).GetComponent<PlayerSnowBall>();
 
             //Debug.Log("Create Snow Ball2");
 

@@ -1,3 +1,4 @@
+using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,7 @@ namespace Game.Player
             _damage *= attackAmout;
             transform.localScale = transform.localScale * sizeAmout;
 
-            StartCoroutine("DestroySnowBall");
+            StartCoroutine("DestroyTimer");
         }
 
         private void FixedUpdate()
@@ -42,11 +43,19 @@ namespace Game.Player
             rb.MovePosition(rb.position + _moveDir * _moveSpeed * Time.deltaTime);
         }
 
-        IEnumerator DestroySnowBall()
+        private void DestroySnowBall()
+        {
+            Debug.Log("Destroy snowball");
+
+            if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Release(this.gameObject);
+            else Destroy(this.gameObject);
+        }
+
+        IEnumerator DestroyTimer()
         {
             yield return new WaitForSeconds(_destroyTime);
 
-            Destroy(this.gameObject);
+            DestroySnowBall();
         }
 
         private void OnCollisionEnter2D(Collision2D other) 
