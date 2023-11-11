@@ -129,6 +129,7 @@ namespace Game.Player
             Vector2 mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
             _animator.SetFloat("DirX", mouseDir.normalized.x);
+            //_animator.SetFloat("DirX", dir.x);
             _animator.SetFloat("Speed", dir.SqrMagnitude());
         }
 
