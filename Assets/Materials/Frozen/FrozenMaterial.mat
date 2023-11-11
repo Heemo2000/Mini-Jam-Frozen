@@ -38,6 +38,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FreezeValue: 0.601
+    - _FreezeValue: 0.528
     m_Colors: []
   m_BuildTextureStacks: []

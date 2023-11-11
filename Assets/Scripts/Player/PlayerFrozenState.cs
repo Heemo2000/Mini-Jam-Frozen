@@ -20,14 +20,12 @@ namespace Game.Player
         {
             _time = 0;
 
-            _controller.SetSnowGauge(0);// Set Snow Gauge to 0 when start to froze
-
             Debug.Log("Start Player Frozen State");
         }
 
         public void OnExit()
         {
-
+            _controller.SetSnowGauge(0);// Set Snow Gauge to 0 when end to froze
         }
 
         public void OnUpdate()
