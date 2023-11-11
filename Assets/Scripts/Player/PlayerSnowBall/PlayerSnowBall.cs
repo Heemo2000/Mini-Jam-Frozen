@@ -17,7 +17,9 @@ namespace Game.Player
         [SerializeField]private LayerMask enemyMask;
         private Vector2 _moveDir;
 
-        public void Init(Vector2 moveDir, float attackAmout, float sizeAmout)
+        float _attackAmount, _sizeAmount;
+
+        public void Init(Vector2 moveDir, float attackAmount, float sizeAmount)
         {
             _moveDir = moveDir.normalized;
 
@@ -26,8 +28,11 @@ namespace Game.Player
             rb = GetComponent<Rigidbody2D>();
             _collider = GetComponent<Collider2D>();
 
-            _damage *= attackAmout;
-            transform.localScale = transform.localScale * sizeAmout;
+            _damage *= attackAmount;
+            transform.localScale = transform.localScale * sizeAmount;
+
+            _attackAmount = attackAmount;
+            _sizeAmount = sizeAmount;
 
             StartCoroutine("DestroyTimer");
         }
@@ -46,7 +51,11 @@ namespace Game.Player
 
         private void DestroySnowBall()
         {
-            Debug.Log("Destroy snowball");
+            //Debug.Log("Destroy snowball");
+
+            //Set setting to default for pooling
+            _damage /= _attackAmount;
+            transform.localScale /= _sizeAmount;
 
             if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Release(this.gameObject);
             else Destroy(this.gameObject);
