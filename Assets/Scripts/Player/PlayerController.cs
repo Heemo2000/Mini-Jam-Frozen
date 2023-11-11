@@ -48,6 +48,8 @@ namespace Game.Player
 
         [SerializeField, Space(5f)] private float _snowGaugeDecreaseSpeed = 2f;
 
+        [SerializeField, Space(5f)] private Material _freezeMaterial;
+
         public float SnowGaugeDecreaseSpeed { get => _snowGaugeDecreaseSpeed; }
 
         public float MaxSnowGauge { get => _maxSnowGauge; }
@@ -73,12 +75,16 @@ namespace Game.Player
         public float SnowBallAttackAmount { get => (100f + _snowBallAttackAmount) / 100f; }
         public float SnowBallSizeAmount { get => (100f + _snowBallSizeAmount) / 100f; }
 
+        private SpriteRenderer _spriteRenderer;
+
 
         private void Awake()
         {
             _hp = _maxHp;
 
             _snowGauge = 0f;
+
+            _spriteRenderer = GetComponent<SpriteRenderer>();
 
             //_rb = GetComponent<Rigidbody2D>();
 
@@ -99,6 +105,8 @@ namespace Game.Player
 
             //Debug.Log("Update");
             _playerStateMachine.OnUpdate();
+
+            UpdateFreezeEffect();
 
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.E)) UpgradeShooter();//Testing Upgrade System
@@ -224,6 +232,20 @@ namespace Game.Player
 
 
         #endregion Power Up Setting
+
+        private void UpdateFreezeEffect()
+        {
+            float curValue = _freezeMaterial.GetFloat("_AmountValue");
+            float finalValue;
+            if (curValue < _snowGauge / _maxSnowGauge)
+                finalValue = Mathf.Lerp(curValue, _snowGauge / _maxSnowGauge, 5f * Time.deltaTime);
+            else
+                finalValue = Mathf.Lerp(curValue, _snowGauge / _maxSnowGauge, 10f * Time.deltaTime);
+
+            _freezeMaterial.SetFloat("_AmountValue", finalValue);//Update full color freeze effect
+
+            _spriteRenderer.material.SetFloat("_FreezeValue", finalValue);
+        }
 
     }
 }

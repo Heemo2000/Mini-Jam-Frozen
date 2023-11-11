@@ -1493,7 +1493,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "68110765482e4a758e880183c5395b23",
     "m_Id": 0,
-    "m_DisplayName": "Amount Value",
+    "m_DisplayName": "AmountValue",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2381,10 +2381,10 @@
     "m_Guid": {
         "m_GuidSerialized": "f0d1c61d-23ae-4ff4-83ad-ee7746215725"
     },
-    "m_Name": "Amount Value",
+    "m_Name": "AmountValue",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Amount Value",
-    "m_DefaultReferenceName": "_Amount_Value",
+    "m_RefNameGeneratedByDisplayName": "AmountValue",
+    "m_DefaultReferenceName": "_AmountValue",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
