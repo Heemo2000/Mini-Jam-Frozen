@@ -101,12 +101,14 @@ namespace Game.Enemy
 
             Vector2 moveDirection = (wayPoint - transform.position).normalized;
             _enemyRB.MovePosition(_enemyRB.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+            /*
             if(allowRotation)
             {
                 float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
                 _currentAngle = Mathf.Lerp(_currentAngle, targetAngle, rotateSpeed * Time.fixedDeltaTime);
                 _enemyRB.MoveRotation(_currentAngle);
             }
+            */
 
             if(Vector2.SqrMagnitude(wayPoint - transform.position) <= wayPointCheckDistance * wayPointCheckDistance)
             {
