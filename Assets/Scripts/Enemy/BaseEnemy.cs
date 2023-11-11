@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
-
+using Game.Core;
 namespace Game.Enemy
 {
     [RequireComponent(typeof(Rigidbody2D))]
@@ -29,12 +29,18 @@ namespace Game.Enemy
         private float _currentAngle = 0.0f;
         private Rigidbody2D _enemyRB;
 
+        private Health _health;
         public Transform Target { get => target; set => target = value; }
         public float MinDistanceToTarget { get => minDistanceToTarget; }
 
+        private void DestroyEnemy()
+        {
+            Destroy(gameObject);
+        }
+
         private IEnumerator FindPath()
         {
-            while(this.enabled)
+            while(GameManager.Instance != null && GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing)
             {
                 float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
 
@@ -68,6 +74,7 @@ namespace Game.Enemy
         {
             _seeker = GetComponent<Seeker>();
             _enemyRB = GetComponent<Rigidbody2D>();
+            _health = GetComponent<Health>();
         }
         
         
@@ -77,12 +84,18 @@ namespace Game.Enemy
             _enemyRB.isKinematic = true;
             _currentIndex = 0;
             StartCoroutine(FindPath());
+            _health.OnDeath += DestroyEnemy;
         }
 
         // Update is called once per frame
         protected virtual void FixedUpdate()
         {
-            
+            if(!(GameManager.Instance != null && 
+                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing && 
+                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
+            {
+                return;
+            }
             float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
             if(_path == null || _currentIndex >= _path.vectorPath.Count || squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)
             {
@@ -115,6 +128,10 @@ namespace Game.Enemy
                 _currentIndex++;
             }
 
+        }
+
+        private void OnDestroy() {
+            _health.OnDeath -= DestroyEnemy;
         }
     }
 

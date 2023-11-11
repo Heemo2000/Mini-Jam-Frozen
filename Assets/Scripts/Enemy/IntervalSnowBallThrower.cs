@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Core;
 
 namespace Game.Enemy
 {
@@ -15,6 +16,12 @@ namespace Game.Enemy
 
         protected override void Update()
         {
+            if(!(GameManager.Instance != null && 
+                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing && 
+                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
+            {
+                return;
+            }
             float squareDistanceToTarget = Vector2.SqrMagnitude(base.Target.position - transform.position);
             if(squareDistanceToTarget <= base.MinShootDistance * base.MinShootDistance)
             {

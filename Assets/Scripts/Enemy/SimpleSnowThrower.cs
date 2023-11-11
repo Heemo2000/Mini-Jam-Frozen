@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Weapon;
+using Game.Core;
+
 namespace Game.Enemy
 {
     public class SimpleSnowThrower : BaseEnemy
@@ -23,6 +25,12 @@ namespace Game.Enemy
         // Update is called once per frame
         protected virtual void Update()
         {
+            if(!(GameManager.Instance != null && 
+                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing && 
+                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
+            {
+                return;
+            }
             float squareDistanceToTarget = Vector2.SqrMagnitude(base.Target.position - transform.position);
             if(squareDistanceToTarget <= minShootDistance * minShootDistance)
             {

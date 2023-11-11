@@ -249,7 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotateSpeed: 10
-  allowRotation: 0
+  allowRotation: 1
   target: {fileID: 0}
   updateInterval: 1
   wayPointCheckDistance: 0.5
