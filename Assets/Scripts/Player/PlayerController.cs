@@ -95,7 +95,7 @@ namespace Game.Player
         // Update is called once per frame
         void Update()
         {
-            if (GameMangerObserver.CheckGameMangerStatus()) return;
+            if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;
 
             //Debug.Log("Update");
             _playerStateMachine.OnUpdate();
@@ -107,7 +107,7 @@ namespace Game.Player
 
         private void FixedUpdate()
         {
-            if (GameMangerObserver.CheckGameMangerStatus()) return;
+            if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;
 
             _playerStateMachine.OnFixedUpdate();//Run Update in Fixed Update for RigidBody
         }

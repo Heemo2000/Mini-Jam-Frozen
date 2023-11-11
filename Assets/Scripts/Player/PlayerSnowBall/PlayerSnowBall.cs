@@ -34,7 +34,7 @@ namespace Game.Player
 
         private void FixedUpdate()
         {
-            if (GameMangerObserver.CheckGameMangerStatus()) return;
+            if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;
 
             Move();
         }

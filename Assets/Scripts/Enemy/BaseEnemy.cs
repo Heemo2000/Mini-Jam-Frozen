@@ -40,7 +40,7 @@ namespace Game.Enemy
 
         private IEnumerator FindPath()
         {
-            while(GameManager.Instance != null && GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing)
+            while(GameMangerObserver.CheckGameMangerGameStatus())
             {
                 float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
 
@@ -90,7 +90,7 @@ namespace Game.Enemy
         // Update is called once per frame
         protected virtual void FixedUpdate()
         {
-            if (GameMangerObserver.CheckGameMangerStatus()) return;//Change with static checker
+            if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;//Change with static checker
 
             float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
             if(_path == null || _currentIndex >= _path.vectorPath.Count || squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)

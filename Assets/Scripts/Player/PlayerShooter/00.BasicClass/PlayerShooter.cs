@@ -21,7 +21,7 @@ namespace Game.Player
         // Update is called once per frame
         protected virtual void Update()
         {
-            if (GameMangerObserver.CheckGameMangerStatus()) return;
+            if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;
 
             RotateShooter();
         }

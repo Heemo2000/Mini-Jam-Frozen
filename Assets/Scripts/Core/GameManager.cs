@@ -7,13 +7,36 @@ namespace Game.Core
 {
     public static class GameMangerObserver//It's not observer pattern but..lol
     {
-        public static bool CheckGameMangerStatus()
+        private static bool _allowPause = false;
+
+        public static bool CheckGameMangerWholeStatus()
         {
+            if(!_allowPause)
+            {
+                return true;
+            }
             if (!GameManager.Instance) return false;
 
             if (!(GameManager.Instance != null &&
                  GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing &&
                  GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool CheckGameMangerGameStatus()
+        {
+            if(!_allowPause)
+            {
+                return true;
+            }
+            if (!GameManager.Instance) return false;
+
+            if (!(GameManager.Instance != null &&
+                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing))
             {
                 return true;
             }
