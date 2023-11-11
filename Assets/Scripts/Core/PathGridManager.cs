@@ -18,9 +18,9 @@ namespace Game.Core
         private IEnumerator ScanAfterSometime()
         {
             //The condition will change.
-            while(GameManager.Instance != null && GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing)
+            while(GameMangerObserver.CheckGameMangerGameStatus())
             {
-                if(GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused)
+                if(GameMangerObserver.CheckGameMangerGameStatus() || GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused)
                 {
                     _pathfinder.Scan(_pathfinder.graphs);
                     yield return new WaitForSeconds(scanInterval);
