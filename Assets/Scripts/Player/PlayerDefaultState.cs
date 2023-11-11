@@ -7,6 +7,8 @@ namespace Game.Player
 {
     public class PlayerDefaultState : MonoBehaviour , IState
     {
+        [SerializeField] Transform _shooterPos;
+
         private PlayerController _controller;
 
         private Rigidbody2D _rb;
@@ -74,9 +76,22 @@ namespace Game.Player
             _controller.ChangeSnowGauge(_controller.ShootingSnowGauge);
         }
 
+        public void UpgradeShooter()
+        {
+            PlayerShooter nextShooter = _shooter.UpgradeShooter();
+
+            if (nextShooter == null) return;
+
+            _shooter = nextShooter;
+
+            _shooter.transform.position = _shooterPos.position;
+        }
+
         private void SetShooter()//Find Shooter at first Time
         {
-            _shooter = _controller.GetComponentInChildren<PlayerShooter>();
+            _shooter = GetComponentInChildren<PlayerShooter>();
+
+            _shooter.transform.position = _shooterPos.position;
         }
 
         IEnumerator DelayShoot()

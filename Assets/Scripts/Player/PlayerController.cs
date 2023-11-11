@@ -79,6 +79,10 @@ namespace Game.Player
         {
 
             _playerStateMachine.OnUpdate();
+
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.E)) UpgradeShooter();//Testing Upgrade System
+#endif
         }
 
         private void SetStateMachine()//Set the player State and State Machine
@@ -143,5 +147,14 @@ namespace Game.Player
         }
 
         #endregion Snow Gauge Setting
+
+        #region Power Up Setting
+
+        public void UpgradeShooter()//You can call this function to Upgrade Shooter
+        {
+            _defaultState.UpgradeShooter();
+        }
+
+        #endregion Power Up Setting
     }
 }
