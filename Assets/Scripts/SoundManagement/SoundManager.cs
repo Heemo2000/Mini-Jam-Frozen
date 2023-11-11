@@ -54,6 +54,11 @@ namespace Game.SoundManagement
             sfxAudioSource.Play();
         }
 
+        public void PauseSFX()
+        {
+            sfxAudioSource.Pause();
+        }
+
         public void StopSFX()
         {
             sfxAudioSource.Stop();

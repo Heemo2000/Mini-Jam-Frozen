@@ -18,10 +18,17 @@ namespace Game.Core
         private IEnumerator ScanAfterSometime()
         {
             //The condition will change.
-            while(this.enabled)
+            while(GameManager.Instance != null && GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing)
             {
-                _pathfinder.Scan(_pathfinder.graphs);
-                yield return new WaitForSeconds(scanInterval);
+                if(GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused)
+                {
+                    _pathfinder.Scan(_pathfinder.graphs);
+                    yield return new WaitForSeconds(scanInterval);
+                }
+                else
+                {
+                    yield return null;
+                }
             }
         }
         private void Awake() {

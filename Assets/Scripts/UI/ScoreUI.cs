@@ -15,6 +15,7 @@ namespace Game.UI
         }
         public void SetScoreText(float score)
         {
+            //Debug.Log("Setting score text to " + (int)score);
             scoreText.text = ((int)score).ToString();
         }
     

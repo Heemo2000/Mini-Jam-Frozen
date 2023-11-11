@@ -35,6 +35,10 @@ namespace Game.Core
         public GamePauseStatus GamePauseStatus { get=> _gamePauseStatus; }
         public GameplayStatus GameplayStatus { get=> _gameplayStatus;}
 
+        private void InitializeScoreToZero()
+        {
+            ScoreManager.Instance.OnScoreSet?.Invoke(0);
+        }
         private void PauseGame()
         {
             Time.timeScale = 0.0f;
@@ -49,6 +53,7 @@ namespace Game.Core
 
         private void StartGame()
         {
+            //Debug.Log("Starting the game....");
             _gameplayStatus = GameplayStatus.OnGoing;
         }
 
@@ -69,19 +74,34 @@ namespace Game.Core
             OnGameEnd.AddListener(EndGame);
             OnBackToMain.AddListener(ExitGameplay);
 
-            //Just for testing purposes.
-            OnGameplayStart.AddListener(()=> ScoreManager.Instance.OnScoreSet?.Invoke(0));
+            OnGameplayStart.AddListener(InitializeScoreToZero);
+            OnSceneStart?.Invoke();
         }
 
         private void Update() {
-            //Just for testing purposes.
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(_gameplayStatus == GameplayStatus.None && Input.GetKeyDown(KeyCode.Space))
             {
                 OnGameplayStart?.Invoke();
             }
+            else if(_gameplayStatus == GameplayStatus.OnGoing)
+            {
+                if(Input.GetKeyDown(KeyCode.Escape))
+                {
+                    if(_gamePauseStatus == GamePauseStatus.Paused)
+                    {
+                        OnGameResumed?.Invoke();    
+                    }
+                    else
+                    {
+                        OnGamePaused?.Invoke();
+                    }
+                }
+            }
+            
         }
 
         private void OnDestroy() {
+            OnSceneStart.RemoveAllListeners();
             OnGamePaused.RemoveAllListeners();
             OnGameResumed.RemoveAllListeners();
             OnGameplayStart.RemoveAllListeners();
