@@ -12,9 +12,13 @@ namespace Game.Player
         {
             base.Attack();
 
-            PlayerSnowBall snowBallClass = Instantiate(snowBall, _shootPosTransform.position, Quaternion.identity).GetComponent<PlayerSnowBall>();
+            //PlayerSnowBall snowBallClass = Instantiate(snowBall, _shootPosTransform.position, Quaternion.identity).GetComponent<PlayerSnowBall>();
 
-            snowBallClass.Init(transform.rotation * Vector2.right);//Give shooting diraction to snowball
+            //snowBallClass.Init(transform.rotation * Vector2.right);//Give shooting diraction to snowball
+
+            //Debug.Log(_shootPosTransform.position + " " + transform.rotation);
+
+            CreateSnowBall(_shootPosTransform.position, transform.rotation);
         }
     }
 }

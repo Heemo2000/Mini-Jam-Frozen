@@ -12,12 +12,14 @@ namespace Game.Player
         {
             base.Attack();
 
-            PlayerSnowBall snowBallClass;
+            //PlayerSnowBall snowBallClass;
             foreach (Transform pos in _shootPoss)
             {
-                snowBallClass = Instantiate(snowBall, pos.position, Quaternion.identity).GetComponent<PlayerSnowBall>();
+                //snowBallClass = Instantiate(snowBall, pos.position, Quaternion.identity).GetComponent<PlayerSnowBall>();
 
-                snowBallClass.Init(pos.rotation * Vector2.right);//Give shoot direction with anchor rotation
+                //snowBallClass.Init(pos.rotation * Vector2.right);//Give shoot direction with anchor rotation
+
+                CreateSnowBall(pos.position, pos.rotation);
             }
         }
     }

@@ -6,9 +6,16 @@ namespace Game.Player
 {
     public class PlayerShooter : MonoBehaviour
     {
+        PlayerController _controller;
+
         [SerializeField] GameObject _nextLevelShooter;
 
         [SerializeField,Space(10f)] protected GameObject snowBall;
+
+        private void Awake()
+        {
+            _controller = GetComponentInParent<PlayerController>();
+        }
 
         // Update is called once per frame
         protected virtual void Update()
@@ -29,6 +36,19 @@ namespace Game.Player
         public virtual void Attack()//Attack Functions
         {
 
+        }
+
+        protected void CreateSnowBall(Vector2 pos, Quaternion rot)
+        {
+            //Debug.Log("Create Snow Ball");
+
+            PlayerSnowBall snowBallClass = Instantiate(snowBall, pos, Quaternion.identity).GetComponent<PlayerSnowBall>();
+
+            //Debug.Log("Create Snow Ball2");
+
+            snowBallClass.Init(rot * Vector2.right,_controller.SnowBallAttackAmount,_controller.SnowBallSizeAmount);
+
+            //Debug.Log("Create Snow Ball3");
         }
 
         public PlayerShooter UpgradeShooter()

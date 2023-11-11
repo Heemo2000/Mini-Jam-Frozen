@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 namespace Game.Player
 {
     public class PlayerController : MonoBehaviour
@@ -18,7 +20,11 @@ namespace Game.Player
         [Header("Movement Setting")]
         [SerializeField] private float _speed = 10f;
 
-        public float FinalSpeed { get => _speed; }
+        public float FinalSpeed { //Calculating Final Speed
+            get {
+                return _speed * (100f + _playerSpeedAmount) / 100f * (100f - _snowGaugeSpeedDecreaseAmount * _snowGauge / _maxSnowGauge) / 100f;
+            } 
+        }
 
         [Header("Shooting Setting")]
         [SerializeField] private float _shootingDelay = 2f;
@@ -42,18 +48,30 @@ namespace Game.Player
 
         [SerializeField, Space(5f)] private float _snowGaugeDecreaseSpeed = 2f;
 
+        public float SnowGaugeDecreaseSpeed { get => _snowGaugeDecreaseSpeed; }
+
+        public float MaxSnowGauge { get => _maxSnowGauge; }
+        public float SnowGauge { get => _snowGauge; }
+
 
         [Header("Froze Setting")]
         [SerializeField] private float _freezeTime = 2f;
 
         public float FreezeTime { get => _freezeTime; }
         public bool IsFrozen { get; set; } = false;
-        
 
-        public float SnowGaugeDecreaseSpeed { get => _snowGaugeDecreaseSpeed; }
+        [Header("Power Up Setting (%)")]
+        [SerializeField] private float _snowBallAttackAmount = 0f;
+        [SerializeField] private float _snowBallSizeAmount = 0f;
+        [SerializeField] private float _playerSpeedAmount = 0f;
 
-        public float MaxSnowGauge {  get => _maxSnowGauge; }
-        public float SnowGauge { get => _snowGauge; }
+        [Space(5f)]
+        [SerializeField] private float _snowGaugeIncreaseAmount = 0f;
+        [SerializeField] private float _snowGaugeDecreaseAmount = 0f;
+        [SerializeField] private float _snowGaugeSpeedDecreaseAmount = 0f;//It's Decreaseing Player Speed
+
+        public float SnowBallAttackAmount { get => (100f + _snowBallAttackAmount) / 100f; }
+        public float SnowBallSizeAmount { get => (100f + _snowBallSizeAmount) / 100f; }
 
 
         private void Awake()
@@ -126,7 +144,7 @@ namespace Game.Player
 
         #region Snow Gauge Setting
 
-        public void ChangeSnowGauge(float amount)
+        private void ChangeSnowGauge(float amount)
         {
             if(_snowGauge + amount <= 0)
             {
@@ -139,6 +157,20 @@ namespace Game.Player
             }
             else
                 _snowGauge += amount;
+        }
+
+        public void IncreaseSnowGauge(float amount)
+        {
+            amount *= (100f + _snowGaugeIncreaseAmount)/100f;
+
+            ChangeSnowGauge(amount);
+        }
+
+        public void DecreaseSnowGauge(float amount)
+        {
+            amount *= (100f + _snowGaugeDecreaseAmount) / 100f;
+
+            ChangeSnowGauge(-amount);
         }
 
         public void SetSnowGauge(float snowGauge)
@@ -154,6 +186,33 @@ namespace Game.Player
         {
             _defaultState.UpgradeShooter();
         }
+
+        public class PowerUpData//Use this class for powerups
+        {
+            public bool UpgradeShooter = false;
+
+            public float SnowBallAttackAmount = 0f;
+            public float SnowBallSizeAmount = 0f;
+            public float PlayerSpeedAmount = 0f;
+
+            public float SnowGaugeIncreaseAmount = 0f;
+            public float SnowGaugeDecreaseAmount = 0f;
+            public float SnowGaugeSpeedDecreaseAmount = 0f;
+        }
+
+        public void PowerUp(PowerUpData data)
+        {
+            if (data.UpgradeShooter) UpgradeShooter();
+
+            _snowBallAttackAmount += data.SnowBallAttackAmount;
+            _snowBallSizeAmount += data.SnowBallSizeAmount;
+            _playerSpeedAmount += data.PlayerSpeedAmount;
+
+            _snowGaugeIncreaseAmount += data.SnowGaugeIncreaseAmount;
+            _snowGaugeDecreaseAmount += data.SnowGaugeDecreaseAmount;
+            _snowGaugeSpeedDecreaseAmount += data.SnowGaugeSpeedDecreaseAmount;
+        }
+
 
         #endregion Power Up Setting
     }
