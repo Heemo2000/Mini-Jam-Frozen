@@ -11,13 +11,17 @@ namespace Game.Enemy
         
         private Gun _gun;
 
+        public float MinShootDistance { get => minShootDistance; }
+        public Gun Gun { get => _gun; }
+
         protected override void Awake() {
             base.Awake();
             _gun = GetComponent<Gun>();
         }
 
+        
         // Update is called once per frame
-        void Update()
+        protected virtual void Update()
         {
             float squareDistanceToTarget = Vector2.SqrMagnitude(base.Target.position - transform.position);
             if(squareDistanceToTarget <= minShootDistance * minShootDistance)

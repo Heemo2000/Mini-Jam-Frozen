@@ -24,7 +24,7 @@ namespace Game.Weapon
             }
         }
 
-        private void PlayShootSound()
+        protected virtual void PlayShootSound()
         {
             //SoundManager.Instance.PlaySFX(SoundType.BulletShoot);
         }

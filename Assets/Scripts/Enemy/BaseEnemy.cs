@@ -13,6 +13,7 @@ namespace Game.Enemy
         [SerializeField]private float moveSpeed = 10f;
         [Min(0f)]
         [SerializeField]private float rotateSpeed = 10f;
+        [SerializeField]private bool allowRotation = false;
         [SerializeField]private Transform target;
         [Min(0f)]
         [SerializeField]private float updateInterval = 1.0f;
@@ -20,6 +21,7 @@ namespace Game.Enemy
         [SerializeField]private float wayPointCheckDistance = 0.5f;
         [Min(0f)]
         [SerializeField]private float minDistanceToTarget = 5f;
+        
         private Seeker _seeker = null;
         private Path _path = null;
         private int _currentIndex = 0;
@@ -80,12 +82,15 @@ namespace Game.Enemy
         // Update is called once per frame
         protected virtual void FixedUpdate()
         {
-            Vector2 targetDirection = (target.position - transform.position).normalized;
+            if(allowRotation)
+            {
+                Vector2 targetDirection = (target.position - transform.position).normalized;
 
-            float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-            _currentAngle = Mathf.Lerp(_currentAngle, targetAngle, rotateSpeed * Time.fixedDeltaTime);
-            _enemyRB.MoveRotation(_currentAngle);
-
+                float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+                _currentAngle = Mathf.Lerp(_currentAngle, targetAngle, rotateSpeed * Time.fixedDeltaTime);
+                _enemyRB.MoveRotation(_currentAngle);
+            }
+            
             float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
             if(_path == null || _currentIndex >= _path.vectorPath.Count || squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)
             {
