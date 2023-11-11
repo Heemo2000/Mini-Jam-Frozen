@@ -82,18 +82,18 @@ namespace Game.Enemy
         // Update is called once per frame
         protected virtual void FixedUpdate()
         {
-            if(allowRotation)
-            {
-                Vector2 targetDirection = (target.position - transform.position).normalized;
-
-                float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-                _currentAngle = Mathf.Lerp(_currentAngle, targetAngle, rotateSpeed * Time.fixedDeltaTime);
-                _enemyRB.MoveRotation(_currentAngle);
-            }
             
             float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
             if(_path == null || _currentIndex >= _path.vectorPath.Count || squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)
             {
+                if(allowRotation)
+                {
+                    Vector2 targetDirection = (target.position - transform.position).normalized;
+
+                    float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+                    _currentAngle = Mathf.Lerp(_currentAngle, targetAngle, rotateSpeed * Time.fixedDeltaTime);
+                    _enemyRB.MoveRotation(_currentAngle);
+                }
                 return;
             }
 
@@ -101,8 +101,12 @@ namespace Game.Enemy
 
             Vector2 moveDirection = (wayPoint - transform.position).normalized;
             _enemyRB.MovePosition(_enemyRB.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
-            
-            
+            if(allowRotation)
+            {
+                float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+                _currentAngle = Mathf.Lerp(_currentAngle, targetAngle, rotateSpeed * Time.fixedDeltaTime);
+                _enemyRB.MoveRotation(_currentAngle);
+            }
 
             if(Vector2.SqrMagnitude(wayPoint - transform.position) <= wayPointCheckDistance * wayPointCheckDistance)
             {
