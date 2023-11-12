@@ -19,6 +19,8 @@ namespace Game.Player
 
         //Rigidbody2D _rb;
 
+        [SerializeField]private UI.BarsUI playerHealthBar;
+
         [Header("Movement Setting")]
         [SerializeField] private float _speed = 10f;
 
@@ -78,6 +80,7 @@ namespace Game.Player
         public float SnowBallSizeAmount { get => (100f + _snowBallSizeAmount) / 100f; }
 
         private SpriteRenderer _spriteRenderer;
+        private Health _health;
 
 
         private void Awake()
@@ -87,11 +90,11 @@ namespace Game.Player
             _snowGauge = 0f;
 
             _spriteRenderer = GetComponent<SpriteRenderer>();
-
+            _health = GetComponent<Health>();
             //_rb = GetComponent<Rigidbody2D>();
 
-            GetComponent<Health>().OnDeath += PlayerDestroyed;
 
+            
             SetStateMachine();
 
         }
@@ -99,6 +102,8 @@ namespace Game.Player
         // Start is called before the first frame update
         void Start()
         {
+            _health.OnDeath += PlayerDestroyed;
+            _health.OnCurrentHealthSet += playerHealthBar.SetFillAmount;
             
         }
 
@@ -129,7 +134,8 @@ namespace Game.Player
 
         private void OnDestroy()
         {
-            GetComponent<Health>().OnDeath -= PlayerDestroyed;
+            _health.OnDeath -= PlayerDestroyed;
+            _health.OnCurrentHealthSet -= playerHealthBar.SetFillAmount;
         }
 
         private void SetStateMachine()//Set the player State and State Machine

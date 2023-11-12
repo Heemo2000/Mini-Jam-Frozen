@@ -9,6 +9,7 @@ namespace Game.Enemy
     [RequireComponent(typeof(Collider2D))]
     public class BaseEnemy : MonoBehaviour
     {
+        private const int MaxNeighboursDetect = 8; 
         [Min(0f)]
         [SerializeField]private float moveSpeed = 10f;
         [SerializeField] private float freezeMoveSpeed = 0.5f;
@@ -67,6 +68,8 @@ namespace Game.Enemy
         protected Animator animator;
         bool _isMoving = false;
 
+        private Collider2D[] _temp;
+
         private Vector2 ComputeVelocity()
         {
             
@@ -88,7 +91,7 @@ namespace Game.Enemy
                 coll.enabled = false;
 
             this.enabled = false;
-
+            EnemyDeathCounter.Instance.IncreaseCount();
         }
 
         private IEnumerator DetectNeigbours()
@@ -97,10 +100,10 @@ namespace Game.Enemy
             {
                 _detectNeighbours.Clear();
                 int enemyLayerMask = 1 << LayerMask.NameToLayer("Enemy");
-                Collider2D[] temp = Physics2D.OverlapCircleAll(_enemyRB.position, neighboursDetectDistance, enemyLayerMask);
-
-                foreach(var collider in temp)
+                int count = Physics2D.OverlapCircleNonAlloc(_enemyRB.position, neighboursDetectDistance,_temp, enemyLayerMask);
+                for(int i = 0; i < count; i++)
                 {
+                    Collider2D collider = _temp[i];
                     if(collider.transform.TryGetComponent<Rigidbody2D>(out Rigidbody2D body))
                     {
                         _detectNeighbours.Add(body);
@@ -194,6 +197,7 @@ namespace Game.Enemy
 
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
+            _temp = new Collider2D[MaxNeighboursDetect];
         }
         
         

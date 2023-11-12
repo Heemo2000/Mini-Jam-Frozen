@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using Game.PowerupStuff;
 using Game.Player;
+using Game.Core;
+
 namespace Game.UI
 {
     public class PowerupUI : MonoBehaviour
@@ -23,6 +25,7 @@ namespace Game.UI
         {
             powerUpData.UsePowerUps(player);
             PowerupManager.Instance.SetPowerupCanvasVisible(false);
+            GameManager.Instance.OnGameResumed?.Invoke();
         }
         public void SetUI(PowerUpData data)
         {
