@@ -37,12 +37,12 @@ namespace Game.Player
 
         
 
-        [Header("Hp Setting")]//Hp Settings
-        [SerializeField] private float _maxHp = 100f;
-        [SerializeField] private float _hp;
+        //[Header("Hp Setting")]//Hp Settings
+        //[SerializeField] private float _maxHp = 100f;
+        //[SerializeField] private float _hp;
 
-        public float MaxHp { get => _maxHp; }
-        public float Hp {  get => _hp; }
+        //public float MaxHp { get => _maxHp; }
+        //public float Hp {  get => _hp; }
 
         [Header("Snow Gauge Setting")]//Snow Gauge Setting
         [SerializeField] private float _maxSnowGauge = 100f;
@@ -82,13 +82,15 @@ namespace Game.Player
 
         private void Awake()
         {
-            _hp = _maxHp;
+            //_hp = _maxHp;
 
             _snowGauge = 0f;
 
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
             //_rb = GetComponent<Rigidbody2D>();
+
+            GetComponent<Health>().OnDeath += PlayerDestroyed;
 
             SetStateMachine();
 
@@ -122,6 +124,11 @@ namespace Game.Player
             _playerStateMachine.OnFixedUpdate();//Run Update in Fixed Update for RigidBody
         }
 
+        private void OnDestroy()
+        {
+            GetComponent<Health>().OnDeath += PlayerDestroyed;
+        }
+
         private void SetStateMachine()//Set the player State and State Machine
         {
             _playerStateMachine = new StateMachine();
@@ -141,6 +148,17 @@ namespace Game.Player
 
         #region Hp Change Setting
 
+        private void PlayerDestroyed()//Function when player dead
+        {
+            Animator animator = GetComponent<Animator>();
+            animator.SetTrigger("Over");
+
+            GetComponent<SpriteRenderer>().material.SetFloat("_FreezeValue", 1f);
+
+            this.enabled = false;//Turn off playerController
+        }
+
+        /*
         private void ChangeHp(float amount)
         {
             if (_hp + amount <= 0) return;
@@ -158,7 +176,7 @@ namespace Game.Player
         {
             ChangeHp(amount);
         }
-
+        */
         #endregion Hp Change Setting
 
         #region Snow Gauge Setting
