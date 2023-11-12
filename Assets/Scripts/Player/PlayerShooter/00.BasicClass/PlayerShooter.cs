@@ -13,7 +13,7 @@ namespace Game.Player
 
         [SerializeField,Space(10f)] protected GameObject snowBall;
 
-        private void Awake()
+        private void Start()
         {
             _controller = GetComponentInParent<PlayerController>();
         }

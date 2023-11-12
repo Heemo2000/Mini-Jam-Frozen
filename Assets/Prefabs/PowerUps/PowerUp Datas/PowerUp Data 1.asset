@@ -16,7 +16,7 @@ MonoBehaviour:
   _badInfoImage: {fileID: 21300000, guid: 1ff4aac187fa90248afe1a06eab620da, type: 3}
   _goodInfoImage: {fileID: 21300000, guid: d32f3d9ff300efc44b9649703ac11b90, type: 3}
   _upgradeShooter: 1
-  _snowBallAttackAmount: 10
+  _snowBallAttackAmount: 0
   _snowBallSizeAmount: 0
   _playerSpeedAmount: 0
   _snowGaugeIncreaseAmount: 10

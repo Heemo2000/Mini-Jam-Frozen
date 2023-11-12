@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcba354da3be0eb4e9970f17b28d44fb, type: 3}
   m_Name: PowerUp Data 4
   m_EditorClassIdentifier: 
-  _InfoText: Less speed but less freezing
-  _badInfoImage: {fileID: 21300000, guid: c2f0bc64426e29940a63cd0abc4ffbf6, type: 3}
+  _InfoText: Bigger Snowball but slower if frozen
+  _badInfoImage: {fileID: 21300000, guid: da7cab70fe9fd3f4ab8131175db27841, type: 3}
   _goodInfoImage: {fileID: 21300000, guid: 4ad41a43c52677740bf9a32a357f952a, type: 3}
   _upgradeShooter: 0
   _snowBallAttackAmount: 0
-  _snowBallSizeAmount: 0
-  _playerSpeedAmount: -5
+  _snowBallSizeAmount: 10
+  _playerSpeedAmount: 0
   _snowGaugeIncreaseAmount: 0
   _snowGaugeDecreaseAmount: 0
-  _snowGaugeSpeedDecreaseAmount: -10
+  _snowGaugeSpeedDecreaseAmount: 10

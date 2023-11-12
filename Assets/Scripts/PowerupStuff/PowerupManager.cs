@@ -5,6 +5,8 @@ using Game.UI;
 using UnityEngine.Events;
 
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
+
 namespace Game.PowerupStuff
 {
     public class PowerupManager : GenericSingleton<PowerupManager>
@@ -23,13 +25,17 @@ namespace Game.PowerupStuff
         private void GetRandomPowerups()
         {
             Random.InitState((int)System.DateTime.Now.Ticks);
-            int firstPowerupIndex = Random.Range(0, powerUpDatas.Length);
-            
-            Random.InitState((int)System.DateTime.Now.Ticks);
-            int secondPowerupIndex = Random.Range(0, powerUpDatas.Length);
 
-            powerupUI1.SetUI(powerUpDatas[firstPowerupIndex]);
-            powerupUI2.SetUI(powerUpDatas[secondPowerupIndex]);
+            List<PowerUpData> copyedDatas = new List<PowerUpData>((PowerUpData[]) powerUpDatas.Clone());
+
+            PowerUpData firstPowerupIndex = copyedDatas[Random.Range(0,copyedDatas.Count)];
+            copyedDatas.Remove(firstPowerupIndex);
+
+            //Random.InitState((int)System.DateTime.Now.Ticks);
+            PowerUpData secondPowerupIndex = copyedDatas[Random.Range(0, copyedDatas.Count)];
+
+            powerupUI1.SetUI(firstPowerupIndex);
+            powerupUI2.SetUI(secondPowerupIndex);
         }
 
         private void Start() 

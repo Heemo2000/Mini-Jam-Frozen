@@ -38,7 +38,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmountValue: 0.10544912
+    - _AmountValue: 0
     - _Amount_Value: 0.716
     - _Edge_Power: 7.53
     - _MaxAmount: 0.3
