@@ -159,6 +159,8 @@ namespace Game.Player
             GetComponent<SpriteRenderer>().material.SetFloat("_FreezeValue", 1f);
 
             this.enabled = false;//Turn off playerController
+
+            GameManager.Instance.OnGameEnd?.Invoke();
         }
 
         /*
