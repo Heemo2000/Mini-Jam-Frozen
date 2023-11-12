@@ -19,6 +19,7 @@ namespace Game.Enemy
         protected override void Awake() {
             base.Awake();
             _gun = GetComponent<Gun>();
+            if (_gun == null) _gun = GetComponentInChildren<Gun>();
         }
 
         
@@ -26,6 +27,8 @@ namespace Game.Enemy
         protected virtual void Update()
         {
             if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;//Change with static checker
+
+            UpdateAnimator();
 
             float squareDistanceToTarget = Vector2.SqrMagnitude(base.Target.position - transform.position);
             if(squareDistanceToTarget <= minShootDistance * minShootDistance)

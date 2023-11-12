@@ -118,7 +118,7 @@ namespace Game.Core
                 return;
             }
 
-            Debug.Log("Release obj to Pool");
+            //Debug.Log("Release obj to Pool");
 
             poolObject.Release();
             _poolDictionary[poolObject.PrefabID].Enqueue(poolObject);

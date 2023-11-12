@@ -6,13 +6,16 @@ using Game.Core;
 namespace Game.Enemy
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent(typeof(Collider2D))]
     public class BaseEnemy : MonoBehaviour
     {
         [Min(0f)]
         [SerializeField]private float moveSpeed = 10f;
+        [SerializeField] private float freezeMoveSpeed = 0.5f;
+        private float _curMoveSpeed = 0f;
+
         [Min(0f)]
-        [SerializeField]private float rotateSpeed = 10f;
+        [SerializeField,Space(10f)]private float rotateSpeed = 10f;
         [SerializeField]private bool allowRotation = false;
         [SerializeField]private Transform target;
         [Min(0f)]
@@ -58,7 +61,11 @@ namespace Game.Enemy
         public Transform Target { get => target; set => target = value; }
         public float MinDistanceToTarget { get => minDistanceToTarget; }
 
-        
+        //For Animation and Effect
+        [SerializeField,Space(10f)] private float _freezeSpeed = 1f;
+        protected SpriteRenderer spriteRenderer;
+        protected Animator animator;
+        bool _isMoving = false;
 
         private Vector2 ComputeVelocity()
         {
@@ -73,7 +80,15 @@ namespace Game.Enemy
         }
         private void DestroyEnemy()
         {
-            Destroy(gameObject);
+            animator.speed = 0f;
+            spriteRenderer.material.SetFloat("_FreezeValue", 1f);
+
+            Collider2D[] colls = GetComponents<Collider2D>();
+            foreach (Collider2D coll in colls)
+                coll.enabled = false;
+
+            this.enabled = false;
+
         }
 
         private IEnumerator DetectNeigbours()
@@ -156,6 +171,19 @@ namespace Game.Enemy
             }
         }
 
+        protected void UpdateAnimator()
+        {
+            float freezeValue = Mathf.Lerp(spriteRenderer.material.GetFloat("_FreezeValue"), 1f - _health.CurrentAmount / _health.MaxHealth, _freezeSpeed * Time.deltaTime);
+            spriteRenderer.material.SetFloat("_FreezeValue", freezeValue);
+
+            animator.SetBool("IsMoving", _isMoving);
+
+            Vector2 mouseDir = target.position - transform.position;
+            animator.SetFloat("DirX", mouseDir.normalized.x);
+
+            animator.speed = freezeValue;
+        }
+
         protected virtual void Awake() 
         {
             _seeker = GetComponent<Seeker>();
@@ -163,6 +191,9 @@ namespace Game.Enemy
             _health = GetComponent<Health>();
             _detectNeighbours = new List<Rigidbody2D>();
             _enemyCollider = GetComponent<Collider2D>();
+
+            animator = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
         
         
@@ -170,7 +201,7 @@ namespace Game.Enemy
         protected virtual void Start()
         {
             _enemyRB.isKinematic = true;
-            _enemyCollider.isTrigger = true;
+            //_enemyCollider.isTrigger = true;
             //_enemyRB.gravityScale = 0.0f;
             _currentIndex = 0;
             StartCoroutine(FindPath());
@@ -190,19 +221,22 @@ namespace Game.Enemy
                 _enemyRB.MoveRotation(_currentAngle);
             }
 
-
             if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;//Change with static checker
 
             float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
             if(_path == null || _currentIndex >= _path.vectorPath.Count || squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)
-            {    
+            {
+                _isMoving = false;
                 return;
             }
+            _isMoving = true;
+
+            _curMoveSpeed = Mathf.Lerp(freezeMoveSpeed, moveSpeed, _health.CurrentAmount / _health.MaxHealth);
 
             Vector3 wayPoint = _path.vectorPath[_currentIndex];
 
             Vector2 moveDirection = (wayPoint - transform.position).normalized;
-            _enemyRB.MovePosition(_enemyRB.position + (ComputeVelocity() + moveDirection * moveSpeed) * Time.fixedDeltaTime);
+            _enemyRB.MovePosition(_enemyRB.position + (ComputeVelocity() + moveDirection * _curMoveSpeed) * Time.fixedDeltaTime);
 
             /*
             if(allowRotation)
