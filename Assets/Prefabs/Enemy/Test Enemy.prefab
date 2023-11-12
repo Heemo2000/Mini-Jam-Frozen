@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7094490675950734488}
   - component: {fileID: 2295609672422846549}
   - component: {fileID: 2295609672422846547}
-  - component: {fileID: 8442688341439171576}
+  - component: {fileID: 1749390542128022454}
   - component: {fileID: 2295609672422846545}
   - component: {fileID: 6326948646530508767}
   - component: {fileID: 4330665008743030672}
@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 776bbf81053155946b80620dc7d60474, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  freezeMoveSpeed: 0
   rotateSpeed: 20
   allowRotation: 0
   target: {fileID: 0}
@@ -144,8 +145,9 @@ MonoBehaviour:
   alignmentWeight: 10
   cohesionWeight: 10
   separationWeight: 10
+  _freezeSpeed: 5
   minShootDistance: 7
---- !u!114 &8442688341439171576
+--- !u!114 &1749390542128022454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,10 +156,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2295609672422846554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5195f186ec77eb4a8674d14ed8debc9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f75fe3916b4d2a4c8805068b0f29534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 20
 --- !u!50 &2295609672422846545
 Rigidbody2D:
   serializedVersion: 4

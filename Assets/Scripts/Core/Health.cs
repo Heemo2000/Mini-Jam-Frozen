@@ -38,12 +38,12 @@ namespace Game.Core
             }
         }
 
-        private void TakeDamage(float amount)
+        protected virtual void TakeDamage(float amount)
         {
             OnCurrentHealthSet?.Invoke(_currentAmount - amount,maxHealth);
         }
 
-        private void RepairHealth(float amount)
+        protected virtual void RepairHealth(float amount)
         {
             OnCurrentHealthSet?.Invoke(_currentAmount + amount,maxHealth);
         }
