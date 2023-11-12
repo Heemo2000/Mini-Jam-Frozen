@@ -8,8 +8,8 @@ namespace Game.SoundManagement
     {
         None,
         MainMenuTheme,
-        LevelTheme,
-        BulletShoot,
+        ArenaTheme,
+        SnowBallShoot,
         ButtonClick
     }
 
