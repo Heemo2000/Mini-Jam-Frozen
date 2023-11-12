@@ -160,7 +160,7 @@ namespace Game.Player
 
             this.enabled = false;//Turn off playerController
 
-            GameManager.Instance.OnGameEnd?.Invoke();
+            if(GameManager.Instance) GameManager.Instance.OnGameEnd?.Invoke();
         }
 
         /*
