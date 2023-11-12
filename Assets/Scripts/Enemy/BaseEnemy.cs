@@ -50,76 +50,22 @@ namespace Game.Enemy
         private Health _health;
         private Collider2D _enemyCollider;
 
+        private Vector2 _alignmentVelocity = Vector2.zero;
+        private Vector2 _cohesionVelocity = Vector2.zero;
+
+        private Vector2 _separationVelocity = Vector2.zero;
+
         public Transform Target { get => target; set => target = value; }
         public float MinDistanceToTarget { get => minDistanceToTarget; }
 
-        private Vector2 ComputeAlignment()
-        {
-            if(_detectNeighbours.Count == 0)
-            {
-                return Vector2.zero;
-            }
-            Vector2 result = Vector2.zero;
-            
-            foreach(var neighbour in _detectNeighbours)
-            {
-                result += neighbour.velocity;
-            }    
-
-            result /= _detectNeighbours.Count;
-            result.Normalize();
-
-            return result;
-        }
-
-        private Vector2 ComputeCohesion()
-        {
-            if(_detectNeighbours.Count == 0)
-            {
-                return Vector2.zero;
-            }
-
-            Vector2 result = Vector2.zero;
-            result += _enemyRB.velocity;
-
-            result /= _detectNeighbours.Count;
-
-            result = result - _enemyRB.velocity;
-
-            result.Normalize();
-
-            return result;
-        }
-
-        private Vector2 ComputeSeparation()
-        {
-            if(_detectNeighbours.Count == 0)
-            {
-                return Vector2.zero;
-            }
-
-            Vector2 result = Vector2.zero;
-            
-            foreach(var neighbour in _detectNeighbours)
-            {
-                result += neighbour.position - _enemyRB.position;
-            }
-
-            result *= -1;
-
-            return result;
-        }
+        
 
         private Vector2 ComputeVelocity()
         {
-            var alignment = ComputeAlignment();
-            var cohesion = ComputeCohesion();
-            var separation = ComputeSeparation();
-
+            
             var result = _enemyRB.velocity;
 
-            result += alignment * alignmentWeight + cohesion * cohesionWeight + separation * separationWeight;
-
+            result += _alignmentVelocity * alignmentWeight + _cohesionVelocity * cohesionWeight + _separationVelocity * separationWeight;
             result.Normalize();
 
             result *= moveSpeed;
@@ -145,6 +91,35 @@ namespace Game.Enemy
                         _detectNeighbours.Add(body);
                     }
                 }
+
+                _alignmentVelocity = Vector2.zero;
+
+                foreach(var neighbour in _detectNeighbours)
+                {
+                    _alignmentVelocity += neighbour.velocity;
+                }    
+
+                _alignmentVelocity /= _detectNeighbours.Count;
+                _alignmentVelocity.Normalize();
+
+                _cohesionVelocity = Vector2.zero;
+                _cohesionVelocity += _enemyRB.velocity;
+
+                _cohesionVelocity /= _detectNeighbours.Count;
+
+                _cohesionVelocity = _cohesionVelocity - _enemyRB.velocity;
+
+                _cohesionVelocity.Normalize();
+
+                _separationVelocity = Vector2.zero;
+            
+                foreach(var neighbour in _detectNeighbours)
+                {
+                    _separationVelocity += neighbour.position - _enemyRB.position;
+                }
+
+                _separationVelocity *= -1;
+
                 yield return new WaitForSeconds(neighboursDetectInterval);
             }
         }
