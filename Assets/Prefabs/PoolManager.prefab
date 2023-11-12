@@ -47,3 +47,5 @@ MonoBehaviour:
   poolObjData:
   - prefab: {fileID: -8246072850043863270, guid: b58daa6e6dcdcd642aaaec707a62d686, type: 3}
     count: 100
+  - prefab: {fileID: -554779039286208323, guid: 451fc314a4183aa458b710ce8bac8589, type: 3}
+    count: 100

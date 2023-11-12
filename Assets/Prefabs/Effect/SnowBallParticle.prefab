@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 9221486002037360719}
   - component: {fileID: 5650593035668097934}
   - component: {fileID: 3486493690680351545}
+  - component: {fileID: -554779039286208323}
+  - component: {fileID: 3005075573870845401}
   m_Layer: 0
   m_Name: SnowBallParticle
   m_TagString: Untagged
@@ -4870,3 +4872,28 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-554779039286208323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857173439312541862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628c141ae94236b469b394f16078c81c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3005075573870845401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857173439312541862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c010d4146742448bc1cec54113bfae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timer: 1

@@ -90,7 +90,7 @@ MonoBehaviour:
   detectMask:
     serializedVersion: 2
     m_Bits: 8
-  destroyEffect: {fileID: 0}
+  destroyEffect: {fileID: 5650593035668097934, guid: 451fc314a4183aa458b710ce8bac8589, type: 3}
 --- !u!1 &9028445841590881918
 GameObject:
   m_ObjectHideFlags: 0

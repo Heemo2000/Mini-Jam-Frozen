@@ -58,6 +58,8 @@ namespace Game.Weapon
                 Health health = other.transform.GetComponent<Health>();
                 health?.OnHealthDamaged?.Invoke(damage);
                 //Instantiate(destroyEffect, transform.position, Quaternion.identity);
+                if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Get(destroyEffect.gameObject, transform.position, Quaternion.identity);
+
                 Destroy(gameObject);
             }
             else
