@@ -19,6 +19,8 @@ namespace Game.Core
         {
             yield return new WaitForSeconds(_timer);
 
+            GetComponent<ParticleSystem>().Stop();
+
             if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Release(this.gameObject);
             else Destroy(this.gameObject);
         }

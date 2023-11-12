@@ -22,11 +22,14 @@ namespace Game.Weapon
 
         Vector3 _dir;
 
+        bool _hit;
+
         private void Awake() 
         {
             _bulletRB = GetComponent<Rigidbody2D>();
             _bulletCollider = GetComponent<CircleCollider2D>();
-            
+
+            _hit = false;
         }
 
         private void Start() 
@@ -57,6 +60,8 @@ namespace Game.Weapon
 
         protected virtual void OnTriggerEnter2D(Collider2D other) 
         {
+            if (_hit) return;
+
             int layerMask = 1 << other.gameObject.layer;
 
             if((layerMask & detectMask.value) != 0)
@@ -65,6 +70,8 @@ namespace Game.Weapon
                 health?.OnHealthDamaged?.Invoke(damage);
                 //Instantiate(destroyEffect, transform.position, Quaternion.identity);
                 if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Get(destroyEffect.gameObject, transform.position, Quaternion.identity);
+
+                _hit = true;
 
                 Destroy(gameObject);
             }
