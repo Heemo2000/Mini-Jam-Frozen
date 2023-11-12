@@ -19,6 +19,7 @@ namespace Game.Enemy
         protected override void Awake() {
             base.Awake();
             _gun = GetComponent<Gun>();
+            if (_gun == null) _gun = GetComponentInChildren<Gun>();
         }
 
         

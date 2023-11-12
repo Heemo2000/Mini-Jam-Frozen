@@ -6,7 +6,7 @@ using Game.Core;
 namespace Game.Enemy
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent(typeof(Collider2D))]
     public class BaseEnemy : MonoBehaviour
     {
         [Min(0f)]

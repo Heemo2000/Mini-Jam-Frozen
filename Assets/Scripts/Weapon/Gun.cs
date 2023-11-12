@@ -15,6 +15,20 @@ namespace Game.Weapon
         private float _currentTime = 0.0f;
         public Action OnBulletFired;
 
+        Transform rotateTarget;
+
+        private void Awake()
+        {
+            rotateTarget = GameObject.FindWithTag("Player").transform;
+        }
+
+        private void Update()
+        {
+            Quaternion angle = Quaternion.FromToRotation(Vector2.right, (Vector2)(rotateTarget.position - transform.position).normalized);
+
+            transform.rotation = angle;
+        }
+
         public void Shoot()
         {
             if(_currentTime < Time.time)
