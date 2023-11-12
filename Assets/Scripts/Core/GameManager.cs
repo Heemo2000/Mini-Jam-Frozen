@@ -116,6 +116,7 @@ namespace Game.Core
 
             OnGameplayStart.AddListener(InitializeScoreToZero);
             OnSceneStart?.Invoke();
+            GameManager.Instance.OnGameEnd.AddListener(()=> ScoreManager.Instance.OnScoreSet?.Invoke(ScoreManager.Instance.CurrentScore));
         }
 
         private void Update() {
