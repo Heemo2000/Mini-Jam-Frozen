@@ -46,8 +46,8 @@ namespace Game.Player
             //Debug.Log("Create Snow Ball");
 
             PlayerSnowBall snowBallClass;
-            if(ObjectPoolManager.Instance) snowBallClass = ObjectPoolManager.Instance.Get(snowBall,pos, rot).GetComponent<PlayerSnowBall>();
-            else snowBallClass = Instantiate(snowBall, pos, Quaternion.identity).GetComponent<PlayerSnowBall>();
+            if(ObjectPoolManager.Instance) snowBallClass = ObjectPoolManager.Instance.Get(snowBall,pos, Quaternion.Euler(0, 0, 0)).GetComponent<PlayerSnowBall>();
+            else snowBallClass = Instantiate(snowBall, pos, Quaternion.Euler(0,0,0)).GetComponent<PlayerSnowBall>();
 
             //Debug.Log("Create Snow Ball2");
 

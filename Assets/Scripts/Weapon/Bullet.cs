@@ -20,16 +20,22 @@ namespace Game.Weapon
         private Rigidbody2D _bulletRB;
         private CircleCollider2D _bulletCollider;
 
+        Vector3 _dir;
+
         private void Awake() 
         {
             _bulletRB = GetComponent<Rigidbody2D>();
             _bulletCollider = GetComponent<CircleCollider2D>();
+            
         }
 
         private void Start() 
         {
             _bulletRB.isKinematic = true;
-            _bulletCollider.isTrigger = true;    
+            _bulletCollider.isTrigger = true;
+
+            _dir = transform.right;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         // Update is called once per frame
@@ -46,7 +52,7 @@ namespace Game.Weapon
 
         private void FixedUpdate() 
         {
-            _bulletRB.MovePosition(transform.position + transform.right * moveSpeed * Time.fixedDeltaTime);
+            _bulletRB.MovePosition(transform.position + _dir * moveSpeed * Time.fixedDeltaTime);
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other) 
