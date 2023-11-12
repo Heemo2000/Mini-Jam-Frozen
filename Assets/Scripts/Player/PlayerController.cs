@@ -129,7 +129,7 @@ namespace Game.Player
 
         private void OnDestroy()
         {
-            GetComponent<Health>().OnDeath += PlayerDestroyed;
+            GetComponent<Health>().OnDeath -= PlayerDestroyed;
         }
 
         private void SetStateMachine()//Set the player State and State Machine
