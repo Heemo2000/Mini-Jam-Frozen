@@ -112,8 +112,11 @@ namespace Game.Player
 
             UpdateFreezeEffect();
 
+
+
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.E)) UpgradeShooter();//Testing Upgrade System
+            if(Input.GetKeyDown(KeyCode.P)) PowerupManager.Instance.OnGettingPowerups?.Invoke();
 #endif
         }
 
