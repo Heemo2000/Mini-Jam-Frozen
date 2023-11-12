@@ -38,12 +38,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmountValue: 0.5996682
+    - _AmountValue: 0
     - _Amount_Value: 0.716
     - _Edge_Power: 7.53
-    - _MaxAmount: 0.15
+    - _MaxAmount: 0.57
     - _NoiseDensity: 5.68
     - _NoisePower: 1.81
     m_Colors:
-    - _EffectColor: {r: 0.1773584, g: 0.5646073, b: 2, a: 0}
+    - _EffectColor: {r: 0, g: 0.025943398, b: 0.103773594, a: 0}
   m_BuildTextureStacks: []
