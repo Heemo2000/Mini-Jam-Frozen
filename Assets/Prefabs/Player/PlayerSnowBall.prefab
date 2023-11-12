@@ -103,6 +103,9 @@ MonoBehaviour:
   _moveSpeed: 10
   _damage: 5
   _destroyTime: 2
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!50 &5083616934830944108
 Rigidbody2D:
   serializedVersion: 4

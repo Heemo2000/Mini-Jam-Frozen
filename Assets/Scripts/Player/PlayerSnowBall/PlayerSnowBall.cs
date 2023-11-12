@@ -85,5 +85,22 @@ namespace Game.Player
             }
             
         }
+
+        private void OnTriggerEnter2D(Collider2D other) 
+        {
+            int layerMask = 1 << other.gameObject.layer;
+
+            if((layerMask & enemyMask.value) != 0)
+            {
+                Health health = other.transform.GetComponent<Health>();
+                health?.OnHealthDamaged?.Invoke(_damage);
+                ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
+                Destroy(gameObject);
+            }            
+            else
+            {
+                Physics2D.IgnoreCollision(_collider, other);
+            }            
+        }
     }
 }

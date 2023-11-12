@@ -48,6 +48,7 @@ namespace Game.Enemy
         private float _currentAngle = 0.0f;
         private Rigidbody2D _enemyRB;
         private Health _health;
+        private Collider2D _enemyCollider;
 
         public Transform Target { get => target; set => target = value; }
         public float MinDistanceToTarget { get => minDistanceToTarget; }
@@ -186,6 +187,7 @@ namespace Game.Enemy
             _enemyRB = GetComponent<Rigidbody2D>();
             _health = GetComponent<Health>();
             _detectNeighbours = new List<Rigidbody2D>();
+            _enemyCollider = GetComponent<Collider2D>();
         }
         
         
@@ -193,6 +195,7 @@ namespace Game.Enemy
         protected virtual void Start()
         {
             _enemyRB.isKinematic = true;
+            _enemyCollider.isTrigger = true;
             //_enemyRB.gravityScale = 0.0f;
             _currentIndex = 0;
             StartCoroutine(FindPath());
