@@ -14,7 +14,10 @@ namespace Game.Player
 
         [SerializeField, Space(10f)] float _damage = 5f;
         [SerializeField, Space(10f)] float _destroyTime = 3f;
-        [SerializeField]private LayerMask enemyMask;
+
+        [SerializeField, Space(10f)] private LayerMask enemyMask;
+
+        [SerializeField, Header("Effect")] GameObject _destroyParticle;
         private Vector2 _moveDir;
 
         float _attackAmount, _sizeAmount;
@@ -57,6 +60,8 @@ namespace Game.Player
             _damage /= _attackAmount;
             transform.localScale /= _sizeAmount;
 
+            if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Get(_destroyParticle,transform.position,Quaternion.identity);
+
             if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Release(this.gameObject);
             else Destroy(this.gameObject);
         }
@@ -76,8 +81,10 @@ namespace Game.Player
             {
                 Health health = other.transform.GetComponent<Health>();
                 health?.OnHealthDamaged?.Invoke(_damage);
-                ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
-                Destroy(gameObject);
+
+                if(ScoreManager.Instance) ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
+
+                DestroySnowBall();
             }            
             else
             {
@@ -94,8 +101,10 @@ namespace Game.Player
             {
                 Health health = other.transform.GetComponent<Health>();
                 health?.OnHealthDamaged?.Invoke(_damage);
-                ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
-                Destroy(gameObject);
+
+                if (ScoreManager.Instance) ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
+
+                DestroySnowBall();
             }            
             else
             {
