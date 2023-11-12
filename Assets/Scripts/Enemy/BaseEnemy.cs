@@ -181,7 +181,7 @@ namespace Game.Enemy
             Vector2 mouseDir = target.position - transform.position;
             animator.SetFloat("DirX", mouseDir.normalized.x);
 
-            animator.speed = freezeValue;
+            animator.speed = 1 - freezeValue;
         }
 
         protected virtual void Awake() 
@@ -226,7 +226,13 @@ namespace Game.Enemy
             float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
             if(_path == null || _currentIndex >= _path.vectorPath.Count || squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)
             {
-                _isMoving = false;
+                
+                if(squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)
+                    _isMoving = false;
+                else
+                    _isMoving = true;
+                
+
                 return;
             }
             _isMoving = true;

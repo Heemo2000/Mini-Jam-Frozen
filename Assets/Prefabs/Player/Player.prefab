@@ -244,7 +244,7 @@ MonoBehaviour:
   _shootingSnowGauge: 10
   _maxSnowGauge: 100
   _snowGauge: 0
-  _snowGaugeDecreaseSpeed: 5
+  _snowGaugeDecreaseSpeed: 10
   _freezeMaterial: {fileID: 2100000, guid: e7dc14aaa4b11af449d0d34472aea62e, type: 2}
   _freezeTime: 2
   _snowBallAttackAmount: 0
