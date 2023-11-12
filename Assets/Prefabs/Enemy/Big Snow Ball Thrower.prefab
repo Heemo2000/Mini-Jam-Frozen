@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4222888591026056788}
   - component: {fileID: 1365619139429208850}
   - component: {fileID: 1488526721196794863}
+  - component: {fileID: 1278892968}
   m_Layer: 6
   m_Name: Big Snow Ball Thrower
   m_TagString: Untagged
@@ -90,7 +91,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &4222888591026056784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +232,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6369014, y: 0.30580378}
   m_EdgeRadius: 0
+--- !u!95 &1278892968
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222888591026056799}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: ff9b6190400f0414eb1104a4797e286d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &5169067010841065684
 PrefabInstance:
   m_ObjectHideFlags: 0

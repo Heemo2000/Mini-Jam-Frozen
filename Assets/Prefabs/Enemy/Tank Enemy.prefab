@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5934966701208642672}
   - component: {fileID: 1894694196232598526}
   - component: {fileID: 8187268084737854385}
+  - component: {fileID: 9175863146855210597}
   m_Layer: 6
   m_Name: Tank Enemy
   m_TagString: Untagged
@@ -230,6 +231,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.91208005, y: 0.2930541}
   m_EdgeRadius: 0
+--- !u!95 &9175863146855210597
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934966701208642683}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 02adb372ae7838041a57e590abfe05ba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &3276963195835848144
 PrefabInstance:
   m_ObjectHideFlags: 0

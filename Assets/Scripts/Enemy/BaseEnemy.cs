@@ -58,7 +58,9 @@ namespace Game.Enemy
         public Transform Target { get => target; set => target = value; }
         public float MinDistanceToTarget { get => minDistanceToTarget; }
 
-        
+        //For Animation and Effect
+        protected Animator animator;
+        bool _isMoving = false;
 
         private Vector2 ComputeVelocity()
         {
@@ -156,6 +158,15 @@ namespace Game.Enemy
             }
         }
 
+        protected void UpdateAnimator()
+        {
+            animator.SetBool("IsMoving", _isMoving);
+
+            Vector2 mouseDir = target.position - transform.position;
+
+            animator.SetFloat("DirX", mouseDir.normalized.x);
+        }
+
         protected virtual void Awake() 
         {
             _seeker = GetComponent<Seeker>();
@@ -163,6 +174,8 @@ namespace Game.Enemy
             _health = GetComponent<Health>();
             _detectNeighbours = new List<Rigidbody2D>();
             _enemyCollider = GetComponent<Collider2D>();
+
+            animator = GetComponent<Animator>();
         }
         
         
@@ -190,14 +203,15 @@ namespace Game.Enemy
                 _enemyRB.MoveRotation(_currentAngle);
             }
 
-
             if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;//Change with static checker
 
             float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
             if(_path == null || _currentIndex >= _path.vectorPath.Count || squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)
-            {    
+            {
+                _isMoving = false;
                 return;
             }
+            _isMoving = true;
 
             Vector3 wayPoint = _path.vectorPath[_currentIndex];
 

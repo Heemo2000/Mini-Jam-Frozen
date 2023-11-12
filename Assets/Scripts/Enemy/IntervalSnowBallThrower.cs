@@ -18,6 +18,8 @@ namespace Game.Enemy
         {
             if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;//Change with static checker
 
+            UpdateAnimator();
+
             float squareDistanceToTarget = Vector2.SqrMagnitude(base.Target.position - transform.position);
             if(squareDistanceToTarget <= base.MinShootDistance * base.MinShootDistance)
             {
