@@ -1,3 +1,4 @@
+using Game.SoundManagement;
 using Game.StateMachineManagement;
 using System.Collections;
 using System.Collections.Generic;
@@ -80,6 +81,8 @@ namespace Game.Player
         {
             if (_isReloading) return;
             if (!Input.GetMouseButtonDown(0)) return;//Shoot only when click the mouse left button
+
+            if (SoundManager.Instance) SoundManager.Instance.PlaySFX(SoundType.SnowBallShoot);
 
             _shooter.Attack();//Well It's actually Shoot() but... lol
 

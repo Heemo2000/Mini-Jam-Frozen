@@ -1,3 +1,4 @@
+using Game.SoundManagement;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -135,6 +136,7 @@ namespace Game.Core
         private void Update() {
             if(_gameplayStatus == GameplayStatus.None && Input.GetKeyDown(KeyCode.Space))
             {
+                if (SoundManager.Instance) SoundManager.Instance.PlayMusic(SoundType.ArenaTheme);
                 OnGameplayStart?.Invoke();
             }
             else if(_gameplayStatus == GameplayStatus.OnGoing)

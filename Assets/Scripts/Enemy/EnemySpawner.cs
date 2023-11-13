@@ -46,7 +46,9 @@ namespace Game.Enemy
 
         private void Start() 
         {
-            GameManager.Instance.OnGameplayStart.AddListener(OnSpawnStart);    
+            GameManager.Instance.OnGameplayStart.AddListener(OnSpawnStart);
+
+            if (target == null) target = GameObject.FindWithTag("Player").transform;
         }
     }
 }
