@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Heemo/EnemyTest.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/Game Arena/Arena_John.unity
+    guid: 0d59379496329e64d85ffc662c0bf4f9
   m_configObjects: {}
