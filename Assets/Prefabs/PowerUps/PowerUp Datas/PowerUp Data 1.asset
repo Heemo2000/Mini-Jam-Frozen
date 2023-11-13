@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PowerUp Data 1
   m_EditorClassIdentifier: 
   _InfoText: More attack amount but more freezing
-  _badInfoImage: {fileID: 21300000, guid: 1ff4aac187fa90248afe1a06eab620da, type: 3}
-  _goodInfoImage: {fileID: 21300000, guid: d32f3d9ff300efc44b9649703ac11b90, type: 3}
+  _badInfoImage: {fileID: 21300000, guid: 3e7418c3c9921b84699524eb087b1020, type: 3}
+  _goodInfoImage: {fileID: 21300000, guid: b7cd4f46cfcaee045bc29cc31ae98740, type: 3}
   _upgradeShooter: 1
   _snowBallAttackAmount: 0
   _snowBallSizeAmount: 0
