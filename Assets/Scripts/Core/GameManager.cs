@@ -176,6 +176,8 @@ namespace Game.Core
             OnGameplayStart.RemoveAllListeners();
             OnGameEnd.RemoveAllListeners();
             OnBackToMain.RemoveAllListeners();
+
+            BlurScreen(0f);
         }
         
     }
