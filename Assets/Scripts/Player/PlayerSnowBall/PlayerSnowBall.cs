@@ -94,7 +94,9 @@ namespace Game.Player
 
                 if(ScoreManager.Instance) ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
 
+                ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
                 DestroySnowBall();
+                
             }            
             else
             {
@@ -130,7 +132,9 @@ namespace Game.Player
                             break;
                 }
 
+                ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
                 DestroySnowBall();
+                
             }            
             else
             {

@@ -100,8 +100,6 @@ namespace Game.Weapon
                 if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Get(destroyEffect.gameObject, transform.position, Quaternion.identity);
 
                 _hit = true;
-
-
                 Destroy(gameObject);
             }
             else
