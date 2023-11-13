@@ -39,5 +39,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _FreezeValue: 0
-    m_Colors: []
+    - _HitValue: 0
+    m_Colors:
+    - _Hit_Color: {r: 0.49798858, g: 0.7951213, b: 0.9528302, a: 0}
   m_BuildTextureStacks: []
