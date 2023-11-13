@@ -75,7 +75,7 @@ namespace Game.Core
             }
 
             PoolObject poolObject;
-            if (_poolDictionary.Count != 0)
+            if (_poolDictionary[id].Count != 0)
             {
                 poolObject = _poolDictionary[id].Dequeue();
                 
@@ -83,7 +83,10 @@ namespace Game.Core
             else
             {
                 GameObject obj = Instantiate(prefab);
+
                 poolObject = obj.GetComponent<PoolObject>();
+                poolObject.PrefabID = id;
+                //poolObject.transform.parent = poolParent.transform;
             }
 
             poolObject.Get();
@@ -118,7 +121,7 @@ namespace Game.Core
                 return;
             }
 
-            //Debug.Log("Release obj to Pool");
+            Debug.Log("Release obj to Pool : "+ poolObject.gameObject.name);
 
             poolObject.Release();
             _poolDictionary[poolObject.PrefabID].Enqueue(poolObject);

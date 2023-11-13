@@ -68,6 +68,9 @@ namespace Game.Core
         public UnityEvent OnGameEnd;
         public UnityEvent OnBackToMain;
 
+        [SerializeField, Header("Blur Material")]
+        Material blurMaterial;
+
         private GamePauseStatus _gamePauseStatus = GamePauseStatus.UnPaused;
 
         private GameplayStatus _gameplayStatus = GameplayStatus.None;
@@ -93,12 +96,16 @@ namespace Game.Core
         {
             Time.timeScale = 0.0f;
             _gamePauseStatus = GamePauseStatus.Paused;
+
+            BlurScreen(1f);
         }
 
         private void UnpauseGame()
         {
             Time.timeScale = 1.0f;
             _gamePauseStatus = GamePauseStatus.UnPaused;
+
+            BlurScreen(0f);
         }
 
         private void StartGame()
@@ -110,11 +117,18 @@ namespace Game.Core
         private void EndGame()
         {
             _gameplayStatus = GameplayStatus.End;
+            BlurScreen(1f);
         }
 
         private void ExitGameplay()
         {
             _gameplayStatus = GameplayStatus.None;
+            BlurScreen(0f);
+        }
+
+        private void BlurScreen(float amount)
+        {
+            blurMaterial.SetFloat("_BlurAmount", amount);
         }
         private void Start() 
         {

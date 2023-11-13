@@ -40,11 +40,12 @@ namespace Game.UI
 
         private void Awake() {
             _button = GetComponent<Button>();
+            _button.onClick.AddListener(SetPlayerPowerup);
         }
 
         private void Start() 
         {
-            _button.onClick.AddListener(SetPlayerPowerup);
+
         }
 
         private void OnDestroy() 

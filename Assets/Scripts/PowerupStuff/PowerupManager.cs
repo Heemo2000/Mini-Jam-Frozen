@@ -34,6 +34,8 @@ namespace Game.PowerupStuff
             //Random.InitState((int)System.DateTime.Now.Ticks);
             PowerUpData secondPowerupIndex = copyedDatas[Random.Range(0, copyedDatas.Count)];
 
+            if (!firstPowerupIndex || !secondPowerupIndex) Debug.LogError("No PowerUps Selected");
+
             powerupUI1.SetUI(firstPowerupIndex);
             powerupUI2.SetUI(secondPowerupIndex);
         }
