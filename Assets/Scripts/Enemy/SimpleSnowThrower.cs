@@ -26,7 +26,7 @@ namespace Game.Enemy
         // Update is called once per frame
         protected virtual void Update()
         {
-            if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;//Change with static checker
+            if (!GameManagerObserver.CheckGameManagerWholeStatus()) return;//Change with static checker
 
             UpdateAnimator();
 

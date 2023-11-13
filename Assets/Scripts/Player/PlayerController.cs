@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
 using Game.PowerupStuff;
+using Game.SoundManagement;
 
+using Random = UnityEngine.Random;
 
 namespace Game.Player
 {
@@ -110,7 +112,7 @@ namespace Game.Player
         // Update is called once per frame
         void Update()
         {
-            if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;
+            if (!GameManagerObserver.CheckGameManagerWholeStatus()) return;
 
             //Debug.Log("Update");
             _playerStateMachine.OnUpdate();
@@ -127,7 +129,7 @@ namespace Game.Player
 
         private void FixedUpdate()
         {
-            if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;
+            if (!GameManagerObserver.CheckGameManagerWholeStatus()) return;
 
             _playerStateMachine.OnFixedUpdate();//Run Update in Fixed Update for RigidBody
         }
@@ -167,6 +169,25 @@ namespace Game.Player
             this.enabled = false;//Turn off playerController
 
             if(GameManager.Instance) GameManager.Instance.OnGameEnd?.Invoke();
+
+            Random.InitState((int)System.DateTime.Now.Ticks);
+            int randomIndex = Random.Range(1,5);
+
+            switch(randomIndex)
+            {
+                case 1: 
+                        SoundManager.Instance.PlaySFX(SoundType.DeathHurt1);                         
+                        break;
+
+                case 2: SoundManager.Instance.PlaySFX(SoundType.DeathHurt2);                         
+                        break;
+
+                case 3: SoundManager.Instance.PlaySFX(SoundType.DeathHurt3);                         
+                        break;
+                
+                case 4: SoundManager.Instance.PlaySFX(SoundType.DeathHurt4);                         
+                        break;
+            }
         }
 
         /*

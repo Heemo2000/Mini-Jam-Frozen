@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-
+using Game.SoundManagement;
 
 namespace Game.Core
 {
-    public static class GameMangerObserver//It's not observer pattern but..lol
+    public static class GameManagerObserver//It's not observer pattern but..lol
     {
-        private static bool _allowPause = false;
+        private static bool _allowPause = true;
 
-        public static bool CheckGameMangerWholeStatus()
+        public static bool CheckGameManagerWholeStatus()
         {
             if(!_allowPause)
             {
@@ -17,9 +17,9 @@ namespace Game.Core
             }
             if (!GameManager.Instance) return false;
 
-            if (!(GameManager.Instance != null &&
+            if (GameManager.Instance != null &&
                  GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing &&
-                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused))
+                 GameManager.Instance.GamePauseStatus == GamePauseStatus.UnPaused)
             {
                 return true;
             }
@@ -27,7 +27,7 @@ namespace Game.Core
             return false;
         }
 
-        public static bool CheckGameMangerGameStatus()
+        public static bool CheckGameManagerGameStatus()
         {
             if(!_allowPause)
             {
@@ -35,8 +35,8 @@ namespace Game.Core
             }
             if (!GameManager.Instance) return false;
 
-            if (!(GameManager.Instance != null &&
-                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing))
+            if (GameManager.Instance != null &&
+                 GameManager.Instance.GameplayStatus == GameplayStatus.OnGoing)
             {
                 return true;
             }
@@ -79,6 +79,16 @@ namespace Game.Core
         {
             ScoreManager.Instance.OnScoreSet?.Invoke(0);
         }
+
+        private void PlayGameplayMusic()
+        {
+            SoundManager.Instance.PlayMusic(SoundType.GameplayTheme);
+        }
+
+        private void PlayGameOverMusic()
+        {
+            SoundManager.Instance.PlayMusic(SoundType.GameOverTheme);
+        }
         private void PauseGame()
         {
             Time.timeScale = 0.0f;
@@ -115,6 +125,9 @@ namespace Game.Core
             OnBackToMain.AddListener(ExitGameplay);
 
             OnGameplayStart.AddListener(InitializeScoreToZero);
+            OnGameplayStart.AddListener(PlayGameplayMusic);
+            OnGameEnd.AddListener(PlayGameOverMusic);
+
             OnSceneStart?.Invoke();
             GameManager.Instance.OnGameEnd.AddListener(()=> ScoreManager.Instance.OnScoreSet?.Invoke(ScoreManager.Instance.CurrentScore));
         }

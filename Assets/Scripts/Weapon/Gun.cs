@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.SoundManagement; 
+using Game.Core;
+
+using Random = UnityEngine.Random;
 
 namespace Game.Weapon
 {
@@ -24,6 +27,10 @@ namespace Game.Weapon
 
         private void Update()
         {
+            if(!GameManagerObserver.CheckGameManagerWholeStatus())
+            {
+                return;
+            }
             Quaternion angle = Quaternion.FromToRotation(Vector2.right, (Vector2)(rotateTarget.position - transform.position).normalized);
 
             transform.rotation = angle;
@@ -40,7 +47,21 @@ namespace Game.Weapon
 
         protected virtual void PlayShootSound()
         {
-            //SoundManager.Instance.PlaySFX(SoundType.BulletShoot);
+            Random.InitState((int)System.DateTime.Now.Ticks);
+            int randomIndex = Random.Range(1,4);
+
+                switch(randomIndex)
+                {
+                    case 1: 
+                            SoundManager.Instance.PlaySFX(SoundType.SnowballThrow1);                         
+                            break;
+
+                    case 2: SoundManager.Instance.PlaySFX(SoundType.SnowballThrow2);                         
+                            break;
+
+                    case 3: SoundManager.Instance.PlaySFX(SoundType.SnowballThrow3);                         
+                            break;
+                }
         }
 
         private void FireBullet()

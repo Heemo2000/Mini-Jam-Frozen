@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using Game.Core;
+using Game.SoundManagement;
+
+using Random = UnityEngine.Random;
 namespace Game.Enemy
 {
     [RequireComponent(typeof(Rigidbody2D))]
@@ -92,11 +95,30 @@ namespace Game.Enemy
 
             this.enabled = false;
             EnemyDeathCounter.Instance.IncreaseCount();
+
+            Random.InitState((int)System.DateTime.Now.Ticks);
+            int randomIndex = Random.Range(1,5);
+
+            switch(randomIndex)
+            {
+                case 1: 
+                        SoundManager.Instance.PlaySFX(SoundType.DeathHurt1);                         
+                        break;
+
+                case 2: SoundManager.Instance.PlaySFX(SoundType.DeathHurt2);                         
+                        break;
+
+                case 3: SoundManager.Instance.PlaySFX(SoundType.DeathHurt3);                         
+                        break;
+                
+                case 4: SoundManager.Instance.PlaySFX(SoundType.DeathHurt4);                         
+                        break;
+            }
         }
 
         private IEnumerator DetectNeigbours()
         {
-            while(GameMangerObserver.CheckGameMangerGameStatus())
+            while(GameManagerObserver.CheckGameManagerGameStatus())
             {
                 _detectNeighbours.Clear();
                 int enemyLayerMask = 1 << LayerMask.NameToLayer("Enemy");
@@ -144,7 +166,7 @@ namespace Game.Enemy
 
         private IEnumerator FindPath()
         {
-            while(GameMangerObserver.CheckGameMangerGameStatus())
+            while(GameManagerObserver.CheckGameManagerGameStatus())
             {
                 float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
 
@@ -225,7 +247,7 @@ namespace Game.Enemy
                 _enemyRB.MoveRotation(_currentAngle);
             }
 
-            if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;//Change with static checker
+            if (!GameManagerObserver.CheckGameManagerWholeStatus()) return;//Change with static checker
 
             float squareDistanceToTarget = Vector2.SqrMagnitude(target.position - transform.position);
             if(_path == null || _currentIndex >= _path.vectorPath.Count || squareDistanceToTarget <= minDistanceToTarget * minDistanceToTarget)
@@ -247,15 +269,6 @@ namespace Game.Enemy
 
             Vector2 moveDirection = (wayPoint - transform.position).normalized;
             _enemyRB.MovePosition(_enemyRB.position + (ComputeVelocity() + moveDirection * _curMoveSpeed) * Time.fixedDeltaTime);
-
-            /*
-            if(allowRotation)
-            {
-                float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-                _currentAngle = Mathf.Lerp(_currentAngle, targetAngle, rotateSpeed * Time.fixedDeltaTime);
-                _enemyRB.MoveRotation(_currentAngle);
-            }
-            */
 
             if(Vector2.SqrMagnitude(wayPoint - transform.position) <= wayPointCheckDistance * wayPointCheckDistance)
             {

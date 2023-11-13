@@ -319,7 +319,7 @@ AudioSource:
   m_GameObject: {fileID: 66694201}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 79fd3e7e4fd44c24da287c72b651336a, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1205,7 +1205,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicAudioSource: {fileID: 66694202}
   sfxAudioSource: {fileID: 610572106}
-  sounds: []
+  sounds:
+  - {fileID: 11400000, guid: c72b78a47649dbf46b16ffa652528ef3, type: 2}
+  - {fileID: 11400000, guid: e1ddf405fa574f54885ea11b99fe45f0, type: 2}
+  - {fileID: 11400000, guid: 487f91cbdd46bca44bef05c535959df2, type: 2}
+  - {fileID: 11400000, guid: c7d36bd9192587e419dceba39b899c0c, type: 2}
+  - {fileID: 11400000, guid: 3ff346a809fb16d4ba4654b8cb39d913, type: 2}
+  - {fileID: 11400000, guid: 2b1d1435f8cc6ab4aa05246c40452a1e, type: 2}
+  - {fileID: 11400000, guid: c99894cd6f27e154a9533ed0099a05d6, type: 2}
+  - {fileID: 11400000, guid: 8c10c306f55b474489169491b8e9ebb3, type: 2}
+  - {fileID: 11400000, guid: c642323ba64c5b1428777c27140f9b1c, type: 2}
+  - {fileID: 11400000, guid: 22ab5de545e99ba4cb270d939f78e807, type: 2}
+  - {fileID: 11400000, guid: 5bd4e85f06bbf0243b6d7e7076060b20, type: 2}
+  - {fileID: 11400000, guid: 37d8b3dfe53c4f342b016e69d53b8972, type: 2}
+  - {fileID: 11400000, guid: e0e49dd774a1ed348ad9da18532f6848, type: 2}
+  - {fileID: 11400000, guid: 59d23a3e03206b443886fbd285128e1f, type: 2}
   startingMusic: 0
   musicAudioMixer: {fileID: 24100000, guid: 79fd3e7e4fd44c24da287c72b651336a, type: 2}
   sfxAudioMixer: {fileID: 24100000, guid: ac5f7d30872cf1b4099390ff3757a06b, type: 2}
@@ -2018,7 +2032,7 @@ AudioSource:
   m_GameObject: {fileID: 610572105}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: ac5f7d30872cf1b4099390ff3757a06b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -4631,7 +4645,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6426664100161634163, guid: 7007a8ee8b7707344b146d7d164856df, type: 3}
       propertyPath: maxHealth
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 9100815227487677161, guid: 7007a8ee8b7707344b146d7d164856df, type: 3}
       propertyPath: playerHealthBar

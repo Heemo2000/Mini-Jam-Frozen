@@ -16,7 +16,7 @@ namespace Game.Enemy
 
         protected override void Update()
         {
-            if (!GameMangerObserver.CheckGameMangerWholeStatus()) return;//Change with static checker
+            if (!GameManagerObserver.CheckGameManagerWholeStatus()) return;//Change with static checker
 
             UpdateAnimator();
 

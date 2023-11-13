@@ -4,6 +4,8 @@ using UnityEngine.Audio;
 using UnityEngine;
 using Game.Core;
 
+using Random = UnityEngine.Random;
+
 namespace Game.SoundManagement
 {
     public class SoundManager : GenericSingleton<SoundManager>
@@ -23,10 +25,16 @@ namespace Game.SoundManagement
             Play(soundType,musicAudioSource);
         }
 
+        public void PlayRandomSFX(List<SoundType> soundTypes)
+        {
+            Random.InitState((int)System.DateTime.Now.Ticks);
+            PlaySFX(soundTypes[Random.Range(0, soundTypes.Count)]);
+        }
         public void PlaySFX(SoundType soundType)
         {
             Play(soundType,sfxAudioSource);
         }
+
         
         public void PlaySFXInstantly(SoundType soundType)
         {
@@ -77,7 +85,7 @@ namespace Game.SoundManagement
         protected override void Awake() {
             
             base.Awake();
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             soundDictionary = new Dictionary<SoundType, Sound>();        
             foreach(Sound sound in sounds)
             {

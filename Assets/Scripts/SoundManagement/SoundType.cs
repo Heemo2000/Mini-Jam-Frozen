@@ -8,9 +8,22 @@ namespace Game.SoundManagement
     {
         None,
         MainMenuTheme,
-        LevelTheme,
-        BulletShoot,
-        ButtonClick
+        GameplayTheme,
+        SnowballThrow1,
+        SnowballThrow2,
+        SnowballThrow3,
+        HitBySnowball1,
+        HitBySnowball2,
+        HitBySnowball3,
+        Freeze,
+        PowerupSound,
+        ButtonClick,
+        DeathHurt1,
+        DeathHurt2,
+        DeathHurt3,
+        DeathHurt4,
+        GameOverTheme
+
     }
 
 }

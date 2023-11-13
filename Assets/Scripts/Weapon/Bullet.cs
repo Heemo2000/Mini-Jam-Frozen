@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
+using Game.SoundManagement;
+using Random = UnityEngine.Random;
+
 namespace Game.Weapon
 {
     [RequireComponent(typeof(Rigidbody2D))]
@@ -44,6 +47,10 @@ namespace Game.Weapon
         // Update is called once per frame
         void Update()
         {
+            if(!GameManagerObserver.CheckGameManagerWholeStatus())
+            {
+                return;
+            }
             if(_currentTime > destroyTime)
             {
                 Destroy(gameObject);
@@ -55,6 +62,10 @@ namespace Game.Weapon
 
         private void FixedUpdate() 
         {
+            if(!GameManagerObserver.CheckGameManagerWholeStatus())
+            {
+                return;
+            }
             _bulletRB.MovePosition(transform.position + _dir * moveSpeed * Time.fixedDeltaTime);
         }
 
@@ -68,10 +79,28 @@ namespace Game.Weapon
             {
                 Health health = other.transform.GetComponent<Health>();
                 health?.OnHealthDamaged?.Invoke(damage);
+                
+                Random.InitState((int)System.DateTime.Now.Ticks);
+                int randomIndex = Random.Range(1,4);
+
+                switch(randomIndex)
+                {
+                    case 1: 
+                            SoundManager.Instance.PlaySFX(SoundType.HitBySnowball1);                         
+                            break;
+
+                    case 2: SoundManager.Instance.PlaySFX(SoundType.HitBySnowball2);                         
+                            break;
+
+                    case 3: SoundManager.Instance.PlaySFX(SoundType.HitBySnowball3);                         
+                            break;
+                }
+                
                 //Instantiate(destroyEffect, transform.position, Quaternion.identity);
                 if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Get(destroyEffect.gameObject, transform.position, Quaternion.identity);
 
                 _hit = true;
+
 
                 Destroy(gameObject);
             }
