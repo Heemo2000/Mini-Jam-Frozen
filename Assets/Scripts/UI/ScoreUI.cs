@@ -9,10 +9,11 @@ namespace Game.UI
     {
         [SerializeField]private TMP_Text scoreText;
         
-        private void Start() 
+        private void Awake() 
         {
             ScoreManager.Instance.OnScoreSet += SetScoreText;
         }
+        
         public void SetScoreText(float score)
         {
             //Debug.Log("Setting score text to " + (int)score);

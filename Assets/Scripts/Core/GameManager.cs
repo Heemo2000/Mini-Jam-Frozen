@@ -2,7 +2,6 @@ using Game.SoundManagement;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using Game.SoundManagement;
 
 namespace Game.Core
 {
