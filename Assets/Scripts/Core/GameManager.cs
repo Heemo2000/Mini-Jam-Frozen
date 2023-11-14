@@ -117,7 +117,7 @@ namespace Game.Core
         private void EndGame()
         {
             _gameplayStatus = GameplayStatus.End;
-            BlurScreen(1f);
+            //BlurScreen(1f);
         }
 
         private void ExitGameplay()
@@ -126,7 +126,7 @@ namespace Game.Core
             BlurScreen(0f);
         }
 
-        private void BlurScreen(float amount)
+        public void BlurScreen(float amount)
         {
             blurMaterial.SetFloat("_BlurAmount", amount);
         }
@@ -167,6 +167,14 @@ namespace Game.Core
                 }
             }
             
+            if(_gameplayStatus == GameplayStatus.End)
+            {
+                float amount = blurMaterial.GetFloat("_BlurAmount");
+
+                amount = amount + 0.3f * Time.deltaTime >= 1f ? 1f : amount + 0.3f * Time.deltaTime;
+
+                BlurScreen(amount);
+            }
         }
 
         private void OnDestroy() {

@@ -23,7 +23,7 @@ namespace Game.Core
             {
                 return;
             }
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
             OnScoreSet += SetScore;
             OnScoreIncreased += IncreaseScore;   
         }

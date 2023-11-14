@@ -30,6 +30,8 @@ namespace Game.Player
 
             _animator = GetComponent<Animator>();
 
+            _isReloading = false;
+
             SetShooter();
         }
 
@@ -83,6 +85,8 @@ namespace Game.Player
             if (!Input.GetMouseButtonDown(0)) return;//Shoot only when click the mouse left button
 
             //if (SoundManager.Instance) SoundManager.Instance.PlaySFX(SoundType.SnowBallShoot);
+
+            Debug.Log("Shoot");
 
             _shooter.Attack();//Well It's actually Shoot() but... lol
 

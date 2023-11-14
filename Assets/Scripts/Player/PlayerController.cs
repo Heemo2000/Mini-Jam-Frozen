@@ -130,7 +130,7 @@ namespace Game.Player
         private void FixedUpdate()
         {
             if (!GameManagerObserver.CheckGameManagerWholeStatus()) return;
-
+            //Debug.Log("Updating");
             _playerStateMachine.OnFixedUpdate();//Run Update in Fixed Update for RigidBody
         }
 
@@ -173,7 +173,9 @@ namespace Game.Player
             Random.InitState((int)System.DateTime.Now.Ticks);
             int randomIndex = Random.Range(1,5);
 
-            switch(randomIndex)
+            _spriteRenderer.material.SetFloat("_FreezeValue", 0);
+
+            switch (randomIndex)
             {
                 case 1: 
                         SoundManager.Instance.PlaySFX(SoundType.DeathHurt1);                         
