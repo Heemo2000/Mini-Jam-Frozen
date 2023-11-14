@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcba354da3be0eb4e9970f17b28d44fb, type: 3}
   m_Name: PowerUp Data 1
   m_EditorClassIdentifier: 
-  _InfoText: More attack amount but more freezing
+  _InfoText: More attack amount \nbut more freezing
   _badInfoImage: {fileID: 21300000, guid: 3e7418c3c9921b84699524eb087b1020, type: 3}
   _goodInfoImage: {fileID: 21300000, guid: b7cd4f46cfcaee045bc29cc31ae98740, type: 3}
   _upgradeShooter: 1

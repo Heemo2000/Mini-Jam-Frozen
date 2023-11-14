@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.SoundManagement;
+using Game.Weapon;
+
 namespace Game.Player
 {
     public class PlayerSnowBall : MonoBehaviour//Snow ball class for Player
@@ -17,6 +19,7 @@ namespace Game.Player
         [SerializeField, Space(10f)] float _destroyTime = 3f;
 
         [SerializeField, Space(10f)] private LayerMask enemyMask;
+        [SerializeField] LayerMask enemySnowballMask;
 
         [SerializeField, Header("Effect")] GameObject _destroyParticle;
         private Vector2 _moveDir;
@@ -68,7 +71,25 @@ namespace Game.Player
             transform.localScale /= _sizeAmount;
 
             if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Get(_destroyParticle,transform.position,Quaternion.identity);
+            
+            Random.InitState((int)System.DateTime.Now.Ticks);
+            int randomIndex = Random.Range(1, 4);
 
+            switch (randomIndex)
+            {
+                case 1:
+                    SoundManager.Instance.PlaySFX(SoundType.HitBySnowball1);
+                    break;
+
+                case 2:
+                    SoundManager.Instance.PlaySFX(SoundType.HitBySnowball2);
+                    break;
+
+                case 3:
+                    SoundManager.Instance.PlaySFX(SoundType.HitBySnowball3);
+                    break;
+            }
+            
             //Debug.Log("Hit");
 
             if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Release(this.gameObject);
@@ -116,26 +137,15 @@ namespace Game.Player
 
                 if (ScoreManager.Instance) ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
 
-                Random.InitState((int)System.DateTime.Now.Ticks);
-                int randomIndex = Random.Range(1,4);
-
-                switch(randomIndex)
-                {
-                    case 1: 
-                            SoundManager.Instance.PlaySFX(SoundType.HitBySnowball1);                         
-                            break;
-
-                    case 2: SoundManager.Instance.PlaySFX(SoundType.HitBySnowball2);                         
-                            break;
-
-                    case 3: SoundManager.Instance.PlaySFX(SoundType.HitBySnowball3);                         
-                            break;
-                }
-
                 ScoreManager.Instance.OnScoreIncreased?.Invoke(_damage);
                 DestroySnowBall();
                 
-            }            
+            }
+            else if((layerMask & enemySnowballMask.value) != 0)
+            {
+                other.gameObject.GetComponent<Bullet>().HitSnowBall();
+                DestroySnowBall();
+            }
             else
             {
                 Physics2D.IgnoreCollision(_collider, other);

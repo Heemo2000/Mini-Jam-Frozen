@@ -9,8 +9,15 @@ namespace Game.Enemy
     {
         [SerializeField]private BaseEnemy[] enemies;
         [Min(0f)]
-        [SerializeField]private float spawnInterval = 2.0f;
-        [SerializeField]private Transform target;
+        [SerializeField]private float maxSpawnInterval = 7.0f;
+        [SerializeField] private float minSpawnInterval = 0.5f;
+        [SerializeField] float spawnSpeedDecreaseAmount = 1f;
+
+        [SerializeField] int enemySpawnNum = 2;
+
+        [SerializeField,Space(10f)]private Transform target;
+
+        [SerializeField, Space(10f)] Transform spawnPoss;
 
         private void OnSpawnStart()
         {
@@ -21,8 +28,10 @@ namespace Game.Enemy
             
             while(this.enabled)
             {
+                float spawnInterval = maxSpawnInterval;
+
                 //Debug.Log("Inside spawn coroutine");
-                if(GameManager.Instance.GameplayStatus != GameplayStatus.OnGoing)
+                if (GameManager.Instance.GameplayStatus != GameplayStatus.OnGoing)
                 {
                     break;
                 }
@@ -34,14 +43,32 @@ namespace Game.Enemy
                 else
                 {
                     //Debug.Log("Spawned enemy");
-                    int randomIndex = Random.Range(0, enemies.Length);
-                    BaseEnemy enemy = Instantiate(enemies[randomIndex], transform.position, Quaternion.identity);
-                    enemy.Target = target;
+
+                    for (int i = 0; i < enemySpawnNum; i++) SpawnEnemy();
+
                     yield return new WaitForSeconds(spawnInterval);
+
+                    spawnInterval = spawnInterval > minSpawnInterval ? spawnInterval - spawnSpeedDecreaseAmount : minSpawnInterval;
                 }
             }
 
             //Debug.Log("Stopped spawning");
+        }
+
+        void SpawnEnemy()
+        {
+            int randomIndex = Random.Range(0, enemies.Length);
+            Vector3 randomPos = SelectPos();
+
+            BaseEnemy enemy = Instantiate(enemies[randomIndex], randomPos, Quaternion.identity);
+            enemy.Target = target;
+        }
+
+        Vector3 SelectPos()
+        {
+            int count = spawnPoss.childCount;
+
+            return spawnPoss.GetChild(Random.Range(0, count)).position;
         }
 
         private void Start() 

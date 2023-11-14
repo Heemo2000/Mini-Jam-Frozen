@@ -138,6 +138,9 @@ namespace Game.Player
             _animator.SetFloat("DirX", mouseDir.normalized.x);
             //_animator.SetFloat("DirX", dir.x);
             _animator.SetFloat("Speed", dir.SqrMagnitude());
+
+            _animator.speed = _controller.SpeedIncreaseAmount;
+            //Debug.Log(_controller.SpeedIncreaseAmount);
         }
 
         #endregion Animator Update

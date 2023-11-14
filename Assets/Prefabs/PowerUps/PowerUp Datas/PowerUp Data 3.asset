@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcba354da3be0eb4e9970f17b28d44fb, type: 3}
   m_Name: PowerUp Data 3
   m_EditorClassIdentifier: 
-  _InfoText: More speed but more freezing
+  _InfoText: Faster speed \nbut faster freezing
   _badInfoImage: {fileID: 21300000, guid: 3e7418c3c9921b84699524eb087b1020, type: 3}
   _goodInfoImage: {fileID: 21300000, guid: 4b6ac8f12ebdc8d44a1d181c2c61a4f7, type: 3}
   _upgradeShooter: 0

@@ -94,8 +94,12 @@ namespace Game.Enemy
                 coll.enabled = false;
 
             this.enabled = false;
+            this.GetComponent<Seeker>().enabled = false;
+            Destroy(this.GetComponent<Seeker>());
+
             EnemyDeathCounter.Instance.IncreaseCount();
 
+            /*
             Random.InitState((int)System.DateTime.Now.Ticks);
             int randomIndex = Random.Range(1,5);
 
@@ -114,6 +118,7 @@ namespace Game.Enemy
                 case 4: SoundManager.Instance.PlaySFX(SoundType.DeathHurt4);                         
                         break;
             }
+            */
         }
 
         private IEnumerator DetectNeigbours()

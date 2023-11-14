@@ -107,5 +107,11 @@ namespace Game.Weapon
                 Physics2D.IgnoreCollision(_bulletCollider, other);
             }
         }
+
+        public void HitSnowBall()
+        {
+            _hit = true;
+            Destroy(gameObject);
+        }
     }
 }

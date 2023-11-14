@@ -249,7 +249,7 @@ MonoBehaviour:
   separationWeight: 10
   _freezeSpeed: 5
   minShootDistance: 10
-  shootInterval: 2
+  shootInterval: 3
 --- !u!114 &7647984676463590772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +363,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4222888591026056786}
     m_Modifications:
+    - target: {fileID: -7951744651755835866, guid: aaf098aecb6a9304cb8236c304362d34, type: 3}
+      propertyPath: fireRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -7951744651755835866, guid: aaf098aecb6a9304cb8236c304362d34, type: 3}
       propertyPath: bulletPrefab
       value: 

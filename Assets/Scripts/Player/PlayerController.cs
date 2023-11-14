@@ -28,8 +28,19 @@ namespace Game.Player
 
         public float FinalSpeed { //Calculating Final Speed
             get {
-                return _speed * (100f + _playerSpeedAmount) / 100f * (100f - _snowGaugeSpeedDecreaseAmount * _snowGauge / _maxSnowGauge) / 100f;
+                float speed = _speed * (100f + _playerSpeedAmount) / 100f * (100f - _snowGaugeSpeedDecreaseAmount * _snowGauge / _maxSnowGauge) / 100f;
+                if (speed <= 0) speed = 1f;
+
+                return speed;
             } 
+        }
+
+        public float SpeedIncreaseAmount
+        {
+            get
+            {
+                return FinalSpeed / _speed;
+            }
         }
 
         [Header("Shooting Setting")]
@@ -95,8 +106,6 @@ namespace Game.Player
             _health = GetComponent<Health>();
             //_rb = GetComponent<Rigidbody2D>();
 
-
-            
             SetStateMachine();
 
         }
@@ -138,6 +147,9 @@ namespace Game.Player
         {
             _health.OnDeath -= PlayerDestroyed;
             _health.OnCurrentHealthSet -= playerHealthBar.SetFillAmount;
+
+            _spriteRenderer.material.SetFloat("_FreezeValue", 0f);
+            _freezeMaterial.SetFloat("_AmountValue", 0f);
         }
 
         private void SetStateMachine()//Set the player State and State Machine
@@ -164,7 +176,7 @@ namespace Game.Player
             Animator animator = GetComponent<Animator>();
             animator.SetTrigger("Over");
 
-            GetComponent<SpriteRenderer>().material.SetFloat("_FreezeValue", 1f);
+            //GetComponent<SpriteRenderer>().material.SetFloat("_FreezeValue", 1f);
 
             this.enabled = false;//Turn off playerController
 

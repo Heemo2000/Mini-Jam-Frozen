@@ -191,6 +191,9 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
+  enemySnowballMask:
+    serializedVersion: 2
+    m_Bits: 256
   _destroyParticle: {fileID: 4857173439312541862, guid: 451fc314a4183aa458b710ce8bac8589, type: 3}
 --- !u!50 &5083616934830944108
 Rigidbody2D:
