@@ -29,7 +29,7 @@ namespace Game.PowerupStuff
     {
 
         [SerializeField, Space(10f)]
-        string _InfoText;//You can use this when making UI
+        string _infoText;//You can use this when making UI
 
         [SerializeField, Space(10f)]
         Sprite _badInfoImage;//You can choose text or Image for UI
@@ -37,7 +37,13 @@ namespace Game.PowerupStuff
         [SerializeField]
         Sprite _goodInfoImage;//You can choose text or Image for UI
 
-        public string InfoText { get => _InfoText; }
+        public string InfoText {
+            get
+            {
+                string text = _infoText.Replace("\\n", "\n");
+                return text;
+            }
+        }
         public Sprite BadInfoImage { get => _badInfoImage; }
         public Sprite GoodInfoImage { get => _goodInfoImage; }
 

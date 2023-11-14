@@ -28,6 +28,7 @@ Material:
     - _GridSize: 5
     m_Floats:
     - _BlurAmount: 0
-    - _GridSize: 20
+    - _GridSize: 8
+    - _Spreadness: 6
     m_Colors: []
   m_BuildTextureStacks: []

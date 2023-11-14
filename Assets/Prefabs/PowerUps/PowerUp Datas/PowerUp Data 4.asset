@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcba354da3be0eb4e9970f17b28d44fb, type: 3}
   m_Name: PowerUp Data 4
   m_EditorClassIdentifier: 
-  _InfoText: Bigger Snowball \nbut slower if frozen
+  _infoText: More bigger\nbut more get Slower
   _badInfoImage: {fileID: 21300000, guid: cf9eb6cb97d2b0f489ee6ab0fd552865, type: 3}
   _goodInfoImage: {fileID: 21300000, guid: 7eb648b15958ffb40a24a216811b6726, type: 3}
   _upgradeShooter: 0

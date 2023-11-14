@@ -12,7 +12,7 @@ namespace Game.Weapon
     public class Bullet : MonoBehaviour
     {   
         [SerializeField]protected float moveSpeed = 10f;
-        [SerializeField]private float destroyTime = 10f;
+        [SerializeField] protected float destroyTime = 10f;
         [Min(0f)]
         [SerializeField]protected float damage = 10f;
         [SerializeField]protected LayerMask detectMask;
@@ -95,12 +95,10 @@ namespace Game.Weapon
                     case 3: SoundManager.Instance.PlaySFX(SoundType.HitBySnowball3);                         
                             break;
                 }
-                
-                //Instantiate(destroyEffect, transform.position, Quaternion.identity);
-                if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Get(destroyEffect.gameObject, transform.position, Quaternion.identity);
 
-                _hit = true;
-                Destroy(gameObject);
+                //Instantiate(destroyEffect, transform.position, Quaternion.identity);
+
+                DestroyBullet();
             }
             else
             {
@@ -108,8 +106,15 @@ namespace Game.Weapon
             }
         }
 
-        public void HitSnowBall()
+        public virtual void HitSnowBall()
         {
+            DestroyBullet();
+        }
+
+        protected void DestroyBullet()
+        {
+            if (ObjectPoolManager.Instance) ObjectPoolManager.Instance.Get(destroyEffect.gameObject, transform.position, Quaternion.identity);
+
             _hit = true;
             Destroy(gameObject);
         }

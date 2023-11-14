@@ -112,6 +112,10 @@ namespace Game.Core
         {
             //Debug.Log("Starting the game....");
             _gameplayStatus = GameplayStatus.OnGoing;
+
+            BlurScreen(0f);
+
+            //string str = "More attack amount but more freezing"
         }
 
         private void EndGame()
@@ -144,6 +148,8 @@ namespace Game.Core
 
             OnSceneStart?.Invoke();
             GameManager.Instance.OnGameEnd.AddListener(()=> ScoreManager.Instance.OnScoreSet?.Invoke(ScoreManager.Instance.CurrentScore));
+
+            BlurScreen(1f);
         }
 
         private void Update() {

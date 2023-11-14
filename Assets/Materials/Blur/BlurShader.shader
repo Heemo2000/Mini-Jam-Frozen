@@ -5,6 +5,7 @@ Shader "Custom/UnlitTexture"
         _MainTex("Main Texture", 2D) = "white" {}
         _GridSize("Size of Blur Grid",float) = 1
         _BlurAmount("Amount of Blur",Range(0,1)) = 0.5
+        _Spreadness("Spreadness",float) = 6
     }
 
     // Universal Render Pipeline subshader. If URP is installed this will be used.
@@ -21,6 +22,8 @@ Shader "Custom/UnlitTexture"
             #pragma fragment frag
             
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            #define E 2.71828f
 
             struct Attributes
             {
@@ -45,10 +48,18 @@ Shader "Custom/UnlitTexture"
 
             float _GridSize;
             float _BlurAmount;
+            float _Spreadness;
 
             float4 _MainTex_ST;
             float4 _MainTex_TexelSize;//Get size of Texture;
             CBUFFER_END
+
+            float gaussian(int x){
+                float sigma = _Spreadness * _GridSize;
+                sigma *=sigma;
+
+                return  (1 / sqrt(TWO_PI) / sigma) * pow(E , -(x*x)/(2 * sigma * sigma));
+            }
 
             Varyings vert(Attributes IN)
             {
@@ -66,21 +77,24 @@ Shader "Custom/UnlitTexture"
                 int min =  -round(_GridSize/2);
                 int max = round(_GridSize/2);
 
-                float count = (max - min + 1) * (max - min + 1);
+                float count = 0;
                 for(int y = min; y<=max; y++){
                     for(int x = min; x<=max; x++){
+                        float gauss = gaussian(sqrt(x*x + y*y));
+                        count += gauss;
+                        
                         float2 uv = IN.uv + float2(_MainTex_TexelSize.x * x , _MainTex_TexelSize.y * y);
-                        col += SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex,uv).xyz;
+                        col += gauss * SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex,uv).xyz;
                         
                     }
                 }
-                col /= count;
+                if(count != 0) col /= count;
 
                 float3 originCol = SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex,IN.uv).xyz;
                 
                 float3 finalCol = lerp(originCol,col,_BlurAmount);
 
-                return float4(finalCol,0);
+                return round(_GridSize)!=0 ? float4(finalCol,0) : float4(originCol,0) ;
             }
             ENDHLSL
         }
