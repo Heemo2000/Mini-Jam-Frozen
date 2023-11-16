@@ -22,22 +22,6 @@ namespace Game.Player
 
             CreateSnowBall(_shootPosTransform.position, transform.rotation);
 
-            Random.InitState((int)System.DateTime.Now.Ticks);
-            int randomIndex = Random.Range(1,4);
-
-            switch(randomIndex)
-            {
-                case 1: 
-                        SoundManager.Instance.PlaySFX(SoundType.SnowballThrow1);                         
-                        break;
-
-                case 2: SoundManager.Instance.PlaySFX(SoundType.SnowballThrow2);                         
-                        break;
-
-                case 3: SoundManager.Instance.PlaySFX(SoundType.SnowballThrow3);                         
-                        break;
-            }
-
         }
     }
 }

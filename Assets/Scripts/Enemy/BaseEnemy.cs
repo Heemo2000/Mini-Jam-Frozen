@@ -8,8 +8,8 @@ using Game.SoundManagement;
 using Random = UnityEngine.Random;
 namespace Game.Enemy
 {
-    [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(Collider2D))]
+    //[RequireComponent(typeof(Rigidbody2D))]
+    //[RequireComponent(typeof(Collider2D))]
     public class BaseEnemy : MonoBehaviour
     {
         private const int MaxNeighboursDetect = 8; 
@@ -90,8 +90,10 @@ namespace Game.Enemy
             spriteRenderer.material.SetFloat("_FreezeValue", 1f);
 
             Collider2D[] colls = GetComponents<Collider2D>();
-            foreach (Collider2D coll in colls)
-                coll.enabled = false;
+            for(int i = 0; i < colls.Length; i++)
+            {
+                Destroy(colls[i]);
+            }
 
             this.enabled = false;
             this.GetComponent<Seeker>().enabled = false;
@@ -128,6 +130,7 @@ namespace Game.Enemy
                 _detectNeighbours.Clear();
                 int enemyLayerMask = 1 << LayerMask.NameToLayer("Enemy");
                 int count = Physics2D.OverlapCircleNonAlloc(_enemyRB.position, neighboursDetectDistance,_temp, enemyLayerMask);
+                Debug.Log("Near Enemies : " + count);
                 for(int i = 0; i < count; i++)
                 {
                     Collider2D collider = _temp[i];

@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 10
   _damage: 5
-  _destroyTime: 2
+  _destroyTime: 1
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
