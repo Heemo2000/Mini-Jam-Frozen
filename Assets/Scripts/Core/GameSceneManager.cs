@@ -14,12 +14,16 @@ namespace Game.Core
 
         public void ExitGame()
         {
-#if UNITY_EDITOR
+
+            //Application.OpenURL("https://itch.io/jam/mini-jam-145-frozen/rate/2365087");
+            //#elif UNITY_WEBGL
+            //Application.OpenURL("https://itch.io/jam/mini-jam-145-frozen/rate/2365087");
+//#else
+
+#if UNITY_EDITOR || !UNITY_WEBGL
             UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_WEBPLAYER
-            Application.OpenURL(https://itch.io/jam/mini-jam-145-frozen/rate/2365087);
 #else
-        Application.Quit();
+            Application.Quit();
 #endif
         }
     }
